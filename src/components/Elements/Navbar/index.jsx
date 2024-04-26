@@ -39,8 +39,18 @@ export default function Navbar() {
 
                <div className='hidden md:block'>
                   <div className='flex gap-2 font-semibold text-sm'>
-                     <Link className='bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-full'>Login</Link>
-                     <Link className='bg-yellow-400 hover:bg-yellow-500 text-white py-1 px-3 rounded-full'>Register</Link>
+                     <Link
+                        to='/login'
+                        className='bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-full'
+                     >
+                        Login
+                     </Link>
+                     <Link
+                        to='/register'
+                        className='bg-yellow-400 hover:bg-yellow-500 text-white py-1 px-3 rounded-full'
+                     >
+                        Register
+                     </Link>
                   </div>
                </div>
                <button
@@ -70,8 +80,18 @@ export default function Navbar() {
                      ))}
                   </div>
                   <div className='flex gap-2 font-semibold text-sm py-1'>
-                     <Link className='bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-full'>Login</Link>
-                     <Link className='bg-yellow-400 hover:bg-yellow-500 text-white py-1 px-3 rounded-full'>Register</Link>
+                     <Link
+                        to='/login'
+                        className='bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-full'
+                     >
+                        Login
+                     </Link>
+                     <Link
+                        to='/register'
+                        className='bg-yellow-400 hover:bg-yellow-500 text-white py-1 px-3 rounded-full'
+                     >
+                        Register
+                     </Link>
                   </div>
                </div>
             )}
