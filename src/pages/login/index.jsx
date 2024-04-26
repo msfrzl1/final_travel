@@ -1,11 +1,12 @@
 import PlaceContentCenter from '../../components/Elements/PlaceContentCenter';
+import FormLogin from '../../components/Fragments/FormLogin';
 import Layout from '../../components/Layouts/Layout';
 
 export default function LoginPage() {
    return (
       <Layout>
          <PlaceContentCenter>
-            <h1>Login Page</h1>
+            <FormLogin />
          </PlaceContentCenter>
       </Layout>
    );
