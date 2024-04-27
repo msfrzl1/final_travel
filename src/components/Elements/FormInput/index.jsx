@@ -3,7 +3,7 @@ import Label from './Label';
 
 export default function FormInput({ htmlFor, title, type = 'text', ...props }) {
    return (
-      <div className='flex flex-col gap-1 mb-3'>
+      <div className='flex flex-col gap-1 mb-2'>
          <Label
             htmlFor={htmlFor}
             title={title}
