@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Button from '../../Elements/Button';
+import FormInput from '../../Elements/FormInput';
 
 export default function FormLogin() {
    return (
@@ -9,39 +10,25 @@ export default function FormLogin() {
             <div className='text-sm font-semibold'>Masuk sekarang untuk melanjutkan</div>
          </div>
          <form>
-            <div className='flex flex-col gap-1 mb-3'>
-               <label
-                  htmlFor='email'
-                  className='font-bold text-sm'
-               >
-                  E-mail
-               </label>
-               <input
-                  className='border py-1.5 px-2 rounded-md font-semibold'
-                  type='email'
-                  name='email'
-                  placeholder='example123@mail.com'
-               />
-            </div>
-            <div className='flex flex-col gap-1'>
-               <label
-                  htmlFor='password'
-                  className='font-bold text-sm'
-               >
-                  Password
-               </label>
-               <input
-                  className='border py-1.5 px-2 rounded-md font-semibold'
-                  type='password'
-                  name='password'
-                  placeholder='********'
-               />
-            </div>
-            <div className='flex justify-center gap-1 py-3 text-sm'>
+            <FormInput
+               htmlfor={'email'}
+               title={'Email'}
+               type={'email'}
+               name={'email'}
+               placeholder={'example123@mail.com'}
+            />
+            <FormInput
+               htmlfor={'password'}
+               title={'Password'}
+               type={'password'}
+               name={'password'}
+               placeholder={'example123@mail.com'}
+            />
+            <div className='flex justify-center font-semibold gap-1 pb-3 text-sm'>
                <div>Belum punya akun ?</div>
                <Link
                   to='/register'
-                  className='font-semibold text-indigo-500 hover:underline'
+                  className='text-indigo-500 hover:underline'
                >
                   Register
                </Link>
