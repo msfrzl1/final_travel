@@ -1,15 +1,28 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../Elements/Button';
 import FormInput from '../../Elements/FormInput';
+import useAuth from '../../../hooks/isAuth';
 
 export default function FormLogin() {
-   const handleSumbit = (e) => {
+   const { auth } = useAuth();
+   const navigate = useNavigate();
+
+   const handleSumbit = async (e) => {
       e.preventDefault();
       const userData = {
          email: e.target.email.value,
          password: e.target.password.value,
       };
-      console.log(userData);
+      const response = await auth('login', userData);
+      if (response.status === 200) {
+         setTimeout(() => {
+            navigate('/');
+         }, 1500);
+      } else {
+         setTimeout(() => {
+            console.log(response.response.data.message);
+         }, 1500);
+      }
    };
    return (
       <div className='max-w-lg flex flex-col mx-auto border shadow-[0_0_5px_0] rounded-md p-3 overflow-hidden'>
