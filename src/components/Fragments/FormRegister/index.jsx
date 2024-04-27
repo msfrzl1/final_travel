@@ -14,27 +14,27 @@ export default function FormRegister() {
             <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-3'>
                <div className='w-full'>
                   <FormInput
-                     htmlfor={'email'}
+                     htmlFor={'email'}
                      title={'E-mail'}
                      type={'email'}
                      name={'email'}
                      placeholder={'contoh123@mail.com'}
                   />
                   <FormInput
-                     htmlfor={'name'}
+                     htmlFor={'name'}
                      title={'Nama'}
                      name={'name'}
                      placeholder={'Nama lengkap / Nama Anda'}
                   />
                   <FormInput
-                     htmlfor={'password'}
+                     htmlFor={'password'}
                      title={'Password'}
                      type={'password'}
                      name={'password'}
                      placeholder={'*******'}
                   />
                   <FormInput
-                     htmlfor={'passwordRepeat'}
+                     htmlFor={'passwordRepeat'}
                      title={'Ulangi Password'}
                      type={'password'}
                      name={'passwordRepeat'}
@@ -51,13 +51,13 @@ export default function FormRegister() {
                      <option value={'user'}>User</option>
                   </SelectOption>
                   <FormInput
-                     htmlfor={'profilePictureUrl'}
+                     htmlFor={'profilePictureUrl'}
                      title={'Upload Gambar'}
                      type={'file'}
                      name={'profilePictureUrl'}
                   />
                   <FormInput
-                     htmlfor={'phoneNumber'}
+                     htmlFor={'phoneNumber'}
                      title={'Nomor Telepon'}
                      type={'number'}
                      name={'phoneNumber'}
