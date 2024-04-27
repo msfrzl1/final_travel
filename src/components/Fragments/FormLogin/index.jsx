@@ -22,7 +22,7 @@ export default function FormLogin() {
                title={'Password'}
                type={'password'}
                name={'password'}
-               placeholder={'example123@mail.com'}
+               placeholder={'********'}
             />
             <div className='flex justify-center font-semibold gap-1 pb-3 text-sm'>
                <div>Belum punya akun ?</div>
