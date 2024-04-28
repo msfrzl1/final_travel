@@ -7,6 +7,7 @@ import Button from '../../Elements/Button';
 import SelectOption from '../../Elements/SelectOption';
 import useUpload from '../../../hooks/isUpload';
 import useAuth from '../../../hooks/isAuth';
+import { FaRegistered } from 'react-icons/fa6';
 
 export default function FormRegister() {
    const [imageUrl, setImageUrl] = useState(null);
@@ -59,8 +60,12 @@ export default function FormRegister() {
    };
 
    return (
-      <div className='max-w-2xl flex flex-col mx-auto border shadow-[0_0_5px_0] rounded-md p-3 mt-16 mb-5 md:mb-0 md:mt-0 overflow-hidden'>
+      <div className='max-w-2xl flex flex-col mx-auto border shadow-[0_0_5px_0] rounded-md p-3 mt-14   mb-3 md:mb-0 md:mt-[2.9rem] overflow-hidden'>
          <div className='text-center mb-5'>
+            <FaRegistered
+               size={100}
+               className='mx-auto text-blue-600 animate-bounce'
+            />
             <div className='text-2xl font-mono font-black tracking-widest'>Silahkan registrasi !</div>
             <div className='text-sm font-semibold'>Isi data diri anda untuk melanjutkan</div>
          </div>
