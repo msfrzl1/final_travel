@@ -10,8 +10,6 @@ export default function useAuth() {
             },
          });
          localStorage.setItem('token', res.data.token);
-         localStorage.setItem('name', res.data.data.name);
-         localStorage.setItem('image', res.data.data.profilePictureUrl);
          return res;
       } catch (error) {
          return error;
