@@ -1,13 +1,16 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FormInput from '../../Elements/FormInput';
 import Button from '../../Elements/Button';
 import SelectOption from '../../Elements/SelectOption';
 import useUpload from '../../../hooks/isUpload';
 import { useState } from 'react';
+import useAuth from '../../../hooks/isAuth';
 
 export default function FormRegister() {
    const [imageUrl, setImageUrl] = useState(null);
    const { uploadImage } = useUpload();
+   const { auth } = useAuth();
+   const navigate = useNavigate();
 
    const handleUpload = async (e) => {
       const file = e.target.files[0];
@@ -21,13 +24,34 @@ export default function FormRegister() {
       }
    };
 
+   const handleSubmit = async (e) => {
+      e.preventDefault();
+      const userData = {
+         email: e.target.email.value,
+         name: e.target.name.value,
+         password: e.target.password.value,
+         passwordRepeat: e.target.passwordRepeat.value,
+         role: e.target.role.value,
+         profilePictureUrl: imageUrl,
+         phoneNumber: e.target.phoneNumber.value,
+      };
+      const response = await auth('register', userData);
+      if (response.status === 200) {
+         setTimeout(() => {
+            navigate('/login');
+         }, 1500);
+      } else {
+         console.log(response);
+      }
+   };
+
    return (
       <div className='max-w-2xl flex flex-col mx-auto border shadow-[0_0_5px_0] rounded-md p-3 mt-16 mb-5 md:mb-0 md:mt-0 overflow-hidden'>
          <div className='text-center mb-5'>
             <div className='text-2xl font-mono font-black tracking-widest'>Silahkan registrasi !</div>
             <div className='text-sm font-semibold'>Isi data diri anda untuk melanjutkan</div>
          </div>
-         <form>
+         <form onSubmit={handleSubmit}>
             <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-3'>
                <div className='w-full'>
                   <FormInput
