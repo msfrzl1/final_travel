@@ -20,7 +20,7 @@ export default function FormLogin() {
       if (response.status === 200) {
          setTimeout(() => {
             navigate('/');
-         }, 1500);
+         }, 2000);
          toast.success(response.data.message);
       } else {
          toast.error(response.response.data.message);
@@ -62,7 +62,7 @@ export default function FormLogin() {
             </form>
             <ToastContainer
                position='top-center'
-               autoClose={1000}
+               autoClose={1500}
                hideProgressBar={false}
                newestOnTop={false}
                closeOnClick
