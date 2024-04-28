@@ -1,3 +1,4 @@
+import BannerPage from '../../pages/dasboard/banners/bannersPage';
 import UserPage from '../../pages/dasboard/users/usersPage';
 import LoginPage from '../../pages/login';
 import RegisterPage from '../../pages/register';
@@ -19,6 +20,10 @@ export const routeList = [
          {
             path: 'users',
             element: <UserPage />,
+         },
+         {
+            path: 'banner',
+            element: <BannerPage />,
          },
       ],
    },
