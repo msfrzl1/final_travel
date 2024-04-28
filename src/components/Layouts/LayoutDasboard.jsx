@@ -4,13 +4,10 @@ import { GiVerticalBanner } from 'react-icons/gi';
 import { CgDollar } from 'react-icons/cg';
 import { TbCategory2 } from 'react-icons/tb';
 import { BsActivity } from 'react-icons/bs';
-import { useState } from 'react';
-import { LuPanelLeftOpen, LuPanelRightOpen } from 'react-icons/lu';
 import { useLocation } from 'react-router-dom';
 import Layout from './Layout';
 
 export default function AuthLayoutDasbord() {
-   const [isOpen, setIsOpen] = useState(false);
    const path = useLocation().pathname;
 
    const sideList = [
@@ -21,18 +18,10 @@ export default function AuthLayoutDasbord() {
       { icon: <BsActivity size={25} />, name: 'Activity', link: '/dasboard/Activity' },
    ];
 
-   const toggleSidebar = () => {
-      setIsOpen(!isOpen);
-   };
-
    return (
       <Layout>
          <div className='flex min-h-screen'>
-            <div
-               className={`h-screen border-r bg-white border-gray-200 shadow-[0_0_5px_0] w-14 md:w-44 pt-[4rem] fixed z-[100] ${
-                  isOpen ? '' : 'hidden'
-               }`}
-            >
+            <div className='h-screen border-r bg-white border-gray-200 shadow-[0_0_5px_0] w-14 md:w-44 pt-[4rem] fixed z-[100]'>
                <h1 className='font-bold font-mono text-xl text-center pb-10 hidden md:block'>Dasboard</h1>
                <div className='flex flex-col items-center md:mx-auto md:pt-0 pt-20 space-y-5 px-1 md:px-2 w-full'>
                   {sideList.map((item, index) => (
@@ -53,27 +42,12 @@ export default function AuthLayoutDasbord() {
                   ))}
                </div>
             </div>
-
-            {isOpen ? (
-               <div className='w-full pt-[4rem] pl-16 md:pl-44'>
-                  <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 rounded-lg mb-4'>
-                     <Outlet />
-                  </div>
+            <div className='w-full pt-[4rem] pl-16 md:pl-44'>
+               <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 rounded-lg mb-4'>
+                  <Outlet />
                </div>
-            ) : (
-               <div className='w-full pt-[4rem]'>
-                  <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 rounded-lg mb-4'>
-                     <Outlet />
-                  </div>
-               </div>
-            )}
+            </div>
          </div>
-         <button
-            className='fixed top-16 left-0 bg-black text-white pr-1 py-2 rounded-r-full z-[10000]'
-            onClick={toggleSidebar}
-         >
-            {isOpen ? <LuPanelRightOpen size={20} /> : <LuPanelLeftOpen size={20} />}
-         </button>
       </Layout>
    );
 }
