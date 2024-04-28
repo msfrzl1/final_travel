@@ -1,9 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import FormInput from '../../Elements/FormInput';
 import Button from '../../Elements/Button';
 import SelectOption from '../../Elements/SelectOption';
 import useUpload from '../../../hooks/isUpload';
-import { useState } from 'react';
 import useAuth from '../../../hooks/isAuth';
 
 export default function FormRegister() {
@@ -39,9 +41,20 @@ export default function FormRegister() {
       if (response.status === 200) {
          setTimeout(() => {
             navigate('/login');
-         }, 1500);
+         }, 2000);
+         toast.success(response.data.message);
       } else {
          console.log(response);
+         if (response.message === 'Request failed with status code 400') toast.error('Data tidak boleh kosong');
+         if (response.message === 'Request failed with status code 409') toast.error(response.response.data.message);
+         if (
+            userData.password.length <= 6 &&
+            userData.passwordRepeat.length <= 6 &&
+            userData.password.length > 0 &&
+            userData.passwordRepeat.length > 0
+         )
+            toast.error('Password minimal 6 karakter');
+         if (userData.password !== userData.passwordRepeat) toast.error('Password tidak sama');
       }
    };
 
@@ -118,6 +131,18 @@ export default function FormRegister() {
             </div>
             <Button className='w-full bg-indigo-500 hover:bg-indigo-600'>Registrasi</Button>
          </form>
+         <ToastContainer
+            position='top-center'
+            autoClose={1500}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            pauseOnHover
+            theme='light'
+            transition:Flip
+         />
       </div>
    );
 }
