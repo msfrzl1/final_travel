@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Button from '../../Elements/Button';
 import FormInput from '../../Elements/FormInput';
 import useAuth from '../../../hooks/isAuth';
+import { FaUsersGear } from 'react-icons/fa6';
 
 export default function FormLogin() {
    const { auth } = useAuth();
@@ -31,6 +32,10 @@ export default function FormLogin() {
       <>
          <div className='max-w-lg flex flex-col mx-auto border shadow-[0_0_5px_0] rounded-md p-3'>
             <div className='text-center mb-5'>
+               <FaUsersGear
+                  size={100}
+                  className='mx-auto text-blue-600 animate-bounce'
+               />
                <div className='text-2xl font-mono font-black tracking-widest'>Selamat datang!</div>
                <div className='text-sm font-semibold'>Masuk sekarang untuk melanjutkan</div>
             </div>
