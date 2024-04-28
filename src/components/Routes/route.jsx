@@ -1,5 +1,6 @@
 import LoginPage from '../../pages/login';
 import RegisterPage from '../../pages/register';
+import LayoutDasboard from '../Layouts/LayoutDasboard';
 
 export const routeList = [
    {
@@ -9,5 +10,9 @@ export const routeList = [
    {
       path: '/register',
       element: <RegisterPage />,
+   },
+   {
+      path: '/dasboard',
+      element: <LayoutDasboard />,
    },
 ];
