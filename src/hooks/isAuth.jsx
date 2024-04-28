@@ -10,6 +10,7 @@ export default function useAuth() {
             },
          });
          localStorage.setItem('token', res.data.token);
+         localStorage.setItem('user', JSON.stringify(res.data.data));
          return res;
       } catch (error) {
          return error;
