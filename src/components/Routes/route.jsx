@@ -1,4 +1,5 @@
 import BannerPage from '../../pages/dasboard/banners/bannersPage';
+import PromoPage from '../../pages/dasboard/promos/promosPage';
 import UserPage from '../../pages/dasboard/users/usersPage';
 import LoginPage from '../../pages/login';
 import RegisterPage from '../../pages/register';
@@ -24,6 +25,10 @@ export const routeList = [
          {
             path: 'banner',
             element: <BannerPage />,
+         },
+         {
+            path: 'promo',
+            element: <PromoPage />,
          },
       ],
    },
