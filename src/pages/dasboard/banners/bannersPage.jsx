@@ -44,7 +44,7 @@ export default function BannerPage() {
                >
                   <img
                      src={banner.imageUrl}
-                     alt='banner'
+                     alt={banner.name}
                      className='w-full h-40 object-cover'
                   />
                   <div className='absolute bottom-0 left-0 right-0 bg-black text-white px-2 py-1'>
