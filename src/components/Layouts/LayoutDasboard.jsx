@@ -38,13 +38,13 @@ export default function AuthLayoutDasbord() {
                   {sideList.map((item, index) => (
                      <div
                         key={index}
-                        className='hover:bg-gray-300 ease-in-out duration-200 w-full py-1 rounded-lg cursor-pointer px-3'
+                        className={`hover:bg-gray-300 ease-in-out duration-200 w-full py-1 rounded-lg cursor-pointer px-3 ${
+                           path === item.link ? 'bg-gray-300' : ''
+                        }`}
                      >
                         <Link
                            to={item.link}
-                           className={`flex flex-row items-center py-2${
-                              path === item.link ? 'active flex flex-row items-center py-2 bg-gray-300' : ''
-                           }`}
+                           className='flex flex-row items-center py-2'
                         >
                            <div className='mr-3'>{item.icon}</div>
                            <div className='font-semibold text-xs tracking-wider hidden md:block'>{item.name}</div>
