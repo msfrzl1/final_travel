@@ -1,3 +1,4 @@
+import ActivityPage from '../../pages/dasboard/activitys/activitysPage';
 import BannerPage from '../../pages/dasboard/banners/bannersPage';
 import CategoryPage from '../../pages/dasboard/category/categorysPage';
 import PromoPage from '../../pages/dasboard/promos/promosPage';
@@ -34,6 +35,10 @@ export const routeList = [
          {
             path: 'category',
             element: <CategoryPage />,
+         },
+         {
+            path: 'activity',
+            element: <ActivityPage />,
          },
       ],
    },
