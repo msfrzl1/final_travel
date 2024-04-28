@@ -2,8 +2,25 @@ import { Link } from 'react-router-dom';
 import FormInput from '../../Elements/FormInput';
 import Button from '../../Elements/Button';
 import SelectOption from '../../Elements/SelectOption';
+import useUpload from '../../../hooks/isUpload';
+import { useState } from 'react';
 
 export default function FormRegister() {
+   const [imageUrl, setImageUrl] = useState(null);
+   const { uploadImage } = useUpload();
+
+   const handleUpload = async (e) => {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+         const response = await uploadImage('upload-image', formData);
+         setImageUrl(response.data.url);
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
    return (
       <div className='max-w-2xl flex flex-col mx-auto border shadow-[0_0_5px_0] rounded-md p-3 mt-16 mb-5 md:mb-0 md:mt-0 overflow-hidden'>
          <div className='text-center mb-5'>
@@ -51,6 +68,7 @@ export default function FormRegister() {
                      <option value={'user'}>User</option>
                   </SelectOption>
                   <FormInput
+                     onChange={handleUpload}
                      htmlFor={'profilePictureUrl'}
                      title={'Upload Gambar'}
                      type={'file'}
