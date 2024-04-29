@@ -1,12 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { RiSettings4Line } from 'react-icons/ri';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
 import useUpload from '../../../hooks/isUpload';
+import useGetData from '../../../hooks/isGetData';
 
 export default function UpdateBannersPage() {
    const [imageUrl, setImageUrl] = useState('');
+   const [banner, setBanner] = useState({});
    const { uploadImage } = useUpload();
+   const { getData } = useGetData();
+   const { id } = useParams();
 
    const handleUpload = async (e) => {
       const file = e.target.files[0];
@@ -20,6 +26,10 @@ export default function UpdateBannersPage() {
       }
    };
 
+   useEffect(() => {
+      getData(`banner/${id}`, setBanner);
+   }, []);
+
    return (
       <div className='flex max-w-xl mx-auto pt-8 md:pt-0 pb-12 md:pb-1'>
          <div className='w-full border px-3 pb-3 pt-3 rounded-md shadow-[0_0_15px_0] overflow-hidden'>
@@ -32,13 +42,14 @@ export default function UpdateBannersPage() {
             </div>
             <div className='border-b-2 mb-3'></div>
             <img
-               src={imageUrl}
+               src={imageUrl || banner.imageUrl}
                alt=''
                className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
             />
             <div className='w-full'>
                <form className='shadow-[0_0_5px_0] p-3'>
                   <FormInput
+                     defaultValue={banner.name}
                      htmlFor={'name'}
                      title={'Nama'}
                      name={'name'}
