@@ -1,18 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { RiSettings4Line } from 'react-icons/ri';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
 import useUpload from '../../../hooks/isUpload';
 import useGetData from '../../../hooks/isGetData';
+import useUpdate from '../../../hooks/isUpdate';
 
 export default function UpdateBannersPage() {
    const [imageUrl, setImageUrl] = useState('');
    const [banner, setBanner] = useState({});
    const { uploadImage } = useUpload();
    const { getData } = useGetData();
+   const { update } = useUpdate();
    const { id } = useParams();
+   const navigate = useNavigate();
 
    const handleUpload = async (e) => {
       const file = e.target.files[0];
@@ -23,6 +28,27 @@ export default function UpdateBannersPage() {
          setImageUrl(response.data.url);
       } catch (error) {
          console.log(error);
+      }
+   };
+
+   const handleUpdateBanner = async (e) => {
+      e.preventDefault();
+      const dataBanner = {
+         name: e.target.name.value,
+         imageUrl: imageUrl || banner.imageUrl,
+      };
+      try {
+         const response = await update(`update-banner/${id}`, dataBanner);
+         if (response.status === 200) {
+            toast.success(response.data.message);
+            setTimeout(() => {
+               navigate('/dasboard/banner');
+            }, 2000);
+         }
+      } catch (error) {
+         if (dataBanner.name.length <= 0) {
+            toast.error('Masukan nama banner');
+         }
       }
    };
 
@@ -47,7 +73,10 @@ export default function UpdateBannersPage() {
                className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
             />
             <div className='w-full'>
-               <form className='shadow-[0_0_5px_0] p-3'>
+               <form
+                  onSubmit={handleUpdateBanner}
+                  className='shadow-[0_0_5px_0] p-3'
+               >
                   <FormInput
                      defaultValue={banner.name}
                      htmlFor={'name'}
@@ -63,7 +92,7 @@ export default function UpdateBannersPage() {
                      name={'imageUrl'}
                   />
                   <Button
-                     className='bg-indigo-600 hover:bg-indigo-700'
+                     className='bg-indigo-600 hover:bg-indigo-700 w-full mt-2'
                      type='submit'
                   >
                      Edit Banner
@@ -71,6 +100,18 @@ export default function UpdateBannersPage() {
                </form>
             </div>
          </div>
+         <ToastContainer
+            position='top-center'
+            autoClose={1500}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            pauseOnHover
+            theme='light'
+            transition:Flip
+         />
       </div>
    );
 }
