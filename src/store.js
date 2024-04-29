@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { modalLogoutSlice } from './features/modal/modalLogoutSlice';
+import { modalLogoutSlice } from './features/modalLogoutSlice';
 
 export const store = configureStore({
    reducer: {

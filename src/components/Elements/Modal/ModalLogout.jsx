@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { closeModal } from '../../../features/modalSlice';
+import { closeModal } from '../../../features/modalLogoutSlice';
 
-export default function Modal() {
+export default function ModalLogout() {
    const dispatch = useDispatch();
    return (
       <div

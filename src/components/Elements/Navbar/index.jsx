@@ -3,10 +3,16 @@ import { CgClose } from 'react-icons/cg';
 import { LiaBarsSolid } from 'react-icons/lia';
 import { MdOutlineArrowDropDownCircle } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { openModal } from '../../../features/modalLogoutSlice';
+import ModalLogout from '../Modal/ModalLogout';
 
 export default function Navbar() {
    const [showMenu, setShowMenu] = useState(false);
    const [dropdownOpen, setDropdownOpen] = useState(false);
+   const dispatch = useDispatch();
+   const isOpen = useSelector((state) => state.modalLogout.isOpen);
    const user = JSON.parse(localStorage.getItem('user'));
 
    const toggleButton = () => {
@@ -24,7 +30,7 @@ export default function Navbar() {
                <div className='text-xl font-bold font-mono tracking-widest'>
                   <div>INDIGO</div>
                </div>
-
+               {isOpen ? <ModalLogout /> : null}
                <div className='hidden md:block'>
                   <div className='flex font-semibold text-sm'>
                      <Link
@@ -79,7 +85,12 @@ export default function Navbar() {
                               >
                                  Profil
                               </Link>
-                              <div className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer'>Logout</div>
+                              <div
+                                 onClick={() => dispatch(openModal())}
+                                 className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer'
+                              >
+                                 Logout
+                              </div>
                            </div>
                         )}
                      </>
@@ -140,7 +151,12 @@ export default function Navbar() {
                                     >
                                        Profil
                                     </Link>
-                                    <div className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer'>Logout</div>
+                                    <div
+                                       onClick={() => dispatch(openModal())}
+                                       className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer'
+                                    >
+                                       Logout
+                                    </div>
                                  </div>
                               </div>
                            )}
