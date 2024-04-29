@@ -1,19 +1,20 @@
 import { useState } from 'react';
 import { CgClose } from 'react-icons/cg';
 import { LiaBarsSolid } from 'react-icons/lia';
+import { MdOutlineArrowDropDownCircle } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
    const [showMenu, setShowMenu] = useState(false);
-   const navList = [
-      { name: 'Home', link: '' },
-      { name: 'Promo', link: '' },
-      { name: 'Activity', link: '' },
-      { name: 'Dasboard', link: '' },
-   ];
+   const [dropdownOpen, setDropdownOpen] = useState(false);
+   const user = JSON.parse(localStorage.getItem('user'));
 
    const toggleButton = () => {
       setShowMenu(!showMenu);
+   };
+
+   const toggleDropdown = () => {
+      setDropdownOpen(!dropdownOpen);
    };
 
    return (
@@ -26,32 +27,78 @@ export default function Navbar() {
 
                <div className='hidden md:block'>
                   <div className='flex font-semibold text-sm'>
-                     {navList.map((item, index) => (
-                        <div
-                           key={index}
-                           className='hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer'
+                     <Link
+                        to=''
+                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
+                     >
+                        Home
+                     </Link>
+                     <Link
+                        to=''
+                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
+                     >
+                        Promo
+                     </Link>
+                     <Link
+                        to=''
+                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
+                     >
+                        Activity
+                     </Link>
+                     {user?.role === 'admin' && (
+                        <Link
+                           to='/dasboard/users'
+                           className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
                         >
-                           {item.name}
-                        </div>
-                     ))}
+                           Dasboard
+                        </Link>
+                     )}
                   </div>
                </div>
 
                <div className='hidden md:block'>
-                  <div className='flex gap-2 font-semibold text-sm'>
-                     <Link
-                        to='/login'
-                        className='bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-full'
-                     >
-                        Login
-                     </Link>
-                     <Link
-                        to='/register'
-                        className='bg-yellow-400 hover:bg-yellow-500 text-white py-1 px-3 rounded-full'
-                     >
-                        Register
-                     </Link>
-                  </div>
+                  {user ? (
+                     <>
+                        <button
+                           onClick={toggleDropdown}
+                           className='flex items-center gap-2'
+                        >
+                           <img
+                              src={user?.profilePictureUrl}
+                              alt='profile'
+                              className='w-10 h-10 rounded-full'
+                           />
+                           <p className='text-sm font-semibold'>{user?.name}</p>
+                           <MdOutlineArrowDropDownCircle />
+                        </button>
+                        {dropdownOpen && (
+                           <div className='absolute top-[60px] w-48 right-5 bg-white shadow-lg rounded-md py-2'>
+                              <Link
+                                 to='/update-profile'
+                                 className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
+                              >
+                                 Profil
+                              </Link>
+                              <div className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer'>Logout</div>
+                           </div>
+                        )}
+                     </>
+                  ) : (
+                     <div className='flex gap-2 font-semibold text-sm'>
+                        <Link
+                           to='/login'
+                           className='bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-full'
+                        >
+                           Login
+                        </Link>
+                        <Link
+                           to='/register'
+                           className='bg-yellow-400 hover:bg-yellow-500 text-white py-1 px-3 rounded-full'
+                        >
+                           Register
+                        </Link>
+                     </div>
+                  )}
                </div>
                <button
                   className='md:hidden'
@@ -69,29 +116,77 @@ export default function Navbar() {
             </div>
             {showMenu && (
                <div className='md:hidden'>
-                  <div className='flex flex-col font-semibold text-sm'>
-                     {navList.map((item, index) => (
-                        <div
-                           key={index}
-                           className='hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer'
-                        >
-                           {item.name}
+                  <div className='flex flex-col font-semibold text-sm gap-2'>
+                     {user ? (
+                        <>
+                           <button
+                              onClick={toggleDropdown}
+                              className='flex items-center gap-2'
+                           >
+                              <img
+                                 src={user?.profilePictureUrl}
+                                 alt='profile'
+                                 className='w-10 h-10 rounded-full'
+                              />
+                              <p className='text-sm font-semibold'>{user?.name}</p>
+                              <MdOutlineArrowDropDownCircle />
+                           </button>
+                           {dropdownOpen && (
+                              <div className='w-full'>
+                                 <div className='flex flex-col justify-center items-center mt-2 bg-white shadow-lg rounded-md py-2'>
+                                    <Link
+                                       to='/update-profile'
+                                       className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
+                                    >
+                                       Profil
+                                    </Link>
+                                    <div className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer'>Logout</div>
+                                 </div>
+                              </div>
+                           )}
+                        </>
+                     ) : (
+                        <div className='flex gap-2 font-semibold text-sm'>
+                           <Link
+                              to='/login'
+                              className='bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-full'
+                           >
+                              Login
+                           </Link>
+                           <Link
+                              to='/register'
+                              className='bg-yellow-400 hover:bg-yellow-500 text-white py-1 px-3 rounded-full'
+                           >
+                              Register
+                           </Link>
                         </div>
-                     ))}
-                  </div>
-                  <div className='flex gap-2 font-semibold text-sm py-1'>
+                     )}
                      <Link
-                        to='/login'
-                        className='bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-full'
+                        to='/'
+                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
                      >
-                        Login
+                        Home
                      </Link>
                      <Link
-                        to='/register'
-                        className='bg-yellow-400 hover:bg-yellow-500 text-white py-1 px-3 rounded-full'
+                        to='/activity'
+                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
                      >
-                        Register
+                        Acitivity
                      </Link>
+                     <Link
+                        to='/promo'
+                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
+                     >
+                        Promo
+                     </Link>
+                     {user?.role === 'admin' && (
+                        <Link
+                           to='/dasbord/users'
+                           className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
+                        >
+                           Dasboard
+                        </Link>
+                     )}
                   </div>
                </div>
             )}
