@@ -1,5 +1,6 @@
 import ActivityPage from '../../pages/dasboard/activitys/activitysPage';
 import BannerPage from '../../pages/dasboard/banners/bannersPage';
+import CreateBannerPage from '../../pages/dasboard/banners/createBannersPage';
 import UpdateBannersPage from '../../pages/dasboard/banners/updateBannersPage';
 import CategoryPage from '../../pages/dasboard/category/categorysPage';
 import PromoPage from '../../pages/dasboard/promos/promosPage';
@@ -32,6 +33,10 @@ export const routeList = [
          {
             path: 'banner/update-banner/:id',
             element: <UpdateBannersPage />,
+         },
+         {
+            path: 'banner/create-banner',
+            element: <CreateBannerPage />,
          },
          {
             path: 'promo',

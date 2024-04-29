@@ -34,7 +34,7 @@ export default function BannerPage() {
                <h1 className='text-xl font-black font-mono'>Pengaturan Banner</h1>
             </div>
             <Link
-               to=''
+               to='/dasboard/banner/create-banner'
                className='flex gap-2 items-center'
             >
                <MdOutlineLibraryAdd
