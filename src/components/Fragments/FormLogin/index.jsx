@@ -20,7 +20,7 @@ export default function FormLogin() {
       console.log(response);
       if (response.status === 200) {
          setTimeout(() => {
-            navigate('/');
+            navigate('/dasboard/users');
          }, 2000);
          toast.success(response.data.message);
       } else {
