@@ -60,7 +60,7 @@ export default function FormRegister() {
    };
 
    return (
-      <div className='max-w-2xl flex flex-col mx-auto border shadow-[0_0_5px_0] rounded-md p-3 mt-14   mb-3 md:mb-0 md:mt-[2.9rem] overflow-hidden'>
+      <div className='max-w-2xl flex flex-col mx-auto border shadow-[0_0_5px_0] rounded-md p-3 mb-3 md:mb-0 mt-[3.9rem] overflow-hidden'>
          <div className='text-center mb-5'>
             <FaRegistered
                size={100}

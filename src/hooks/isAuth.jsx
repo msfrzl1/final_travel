@@ -27,7 +27,6 @@ export default function useAuth() {
          });
          if (url === 'logout') {
             localStorage.clear();
-            callback(res);
          } else {
             callback(res.data.data);
          }

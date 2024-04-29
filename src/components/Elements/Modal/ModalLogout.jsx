@@ -1,8 +1,19 @@
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../../features/modalLogoutSlice';
+import useAuth from '../../../hooks/isAuth';
+import { useNavigate } from 'react-router-dom';
 
 export default function ModalLogout() {
    const dispatch = useDispatch();
+   const navigate = useNavigate();
+   const { usersAuth } = useAuth();
+
+   const handleLogout = async () => {
+      await usersAuth('logout');
+      dispatch(closeModal());
+      navigate('/login');
+   };
+
    return (
       <div
          className='modal fade show'
@@ -25,6 +36,7 @@ export default function ModalLogout() {
                </div>
                <div className='modal-footer'>
                   <button
+                     onClick={handleLogout}
                      type='button'
                      className='btn btn-danger'
                   >
