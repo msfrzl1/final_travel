@@ -69,7 +69,7 @@ export default function UpdateBannersPage() {
             <div className='border-b-2 mb-3'></div>
             <img
                src={imageUrl || banner.imageUrl}
-               alt=''
+               alt={banner.name}
                className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
             />
             <div className='w-full'>
