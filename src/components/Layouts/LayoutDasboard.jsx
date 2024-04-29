@@ -20,7 +20,7 @@ export default function AuthLayoutDasbord() {
 
    return (
       <Layout>
-         <div className='flex min-h-screen'>
+         <div className='flex'>
             <div className='h-screen border-r bg-white border-gray-200 shadow-[0_0_5px_0] w-14 md:w-44 pt-[4rem] fixed z-[100]'>
                <h1 className='font-bold font-mono text-xl text-center pb-10 hidden md:block'>Dasboard</h1>
                <div className='flex flex-col items-center md:mx-auto md:pt-0 pt-20 space-y-5 px-1 md:px-2 w-full'>

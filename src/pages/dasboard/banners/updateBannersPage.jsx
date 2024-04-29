@@ -1,10 +1,27 @@
 import { RiSettings4Line } from 'react-icons/ri';
+import { useState } from 'react';
 import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
+import useUpload from '../../../hooks/isUpload';
 
 export default function UpdateBannersPage() {
+   const [imageUrl, setImageUrl] = useState('');
+   const { uploadImage } = useUpload();
+
+   const handleUpload = async (e) => {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+         const response = await uploadImage('upload-image', formData);
+         setImageUrl(response.data.url);
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
    return (
-      <div className='flex max-w-xl mx-auto mt-3'>
+      <div className='flex max-w-xl mx-auto pt-8 md:pt-0 pb-12 md:pb-1'>
          <div className='w-full border px-3 pb-3 pt-3 rounded-md shadow-[0_0_15px_0] overflow-hidden'>
             <div className='flex items-center gap-2 mb-1'>
                <RiSettings4Line
@@ -15,7 +32,7 @@ export default function UpdateBannersPage() {
             </div>
             <div className='border-b-2 mb-3'></div>
             <img
-               src=''
+               src={imageUrl}
                alt=''
                className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
             />
@@ -28,6 +45,7 @@ export default function UpdateBannersPage() {
                      placeholder={'Nama lengkap / Nama Anda'}
                   />
                   <FormInput
+                     onChange={handleUpload}
                      htmlFor={'imageUrl'}
                      title={'Upload Gambar'}
                      type={'file'}
