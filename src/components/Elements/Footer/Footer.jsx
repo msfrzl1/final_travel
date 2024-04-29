@@ -16,9 +16,9 @@ export default function Footer() {
 
    return (
       <div className='bg-black'>
-         <div className='bg-black text-white pl-16'>
-            <div className='flex flex-col md:flex-row justify-between py-5 md:mx-28 px-5'>
-               <div className='w-full md:w-1/3 mt-2'>
+         <div className='bg-black text-white pl-14 md:pl-16'>
+            <div className='flex flex-col md:flex-row justify-between py-5 md:mx-28 gap-5 px-5'>
+               <div className='w-full mt-2'>
                   <h1 className='font-medium text-sm pb-2'>Indigo</h1>
                   <p className='text-xs'>Dengan Indigo Anda dapat merasakan perjalanan baru dan destinasi wisata terbaik yang kami tawarkan</p>
                </div>
@@ -42,7 +42,7 @@ export default function Footer() {
                      })}
                   </nav>
                </div>
-               <div className='w-full md:w-1/3 mt-2'>
+               <div className='w-full mt-2'>
                   <h1 className='font-medium text-sm text-center pb-2'>Newsletter</h1>
                   <nav className='flex flex-col gap-2 text-xs'>
                      <FormInput placeholder='example.com' />

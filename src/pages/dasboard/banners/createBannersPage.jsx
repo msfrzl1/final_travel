@@ -50,7 +50,7 @@ export default function CreateBannerPage() {
    };
 
    return (
-      <div className='flex max-w-xl mx-auto pt-8 pb-12'>
+      <div className={`flex max-w-xl mx-auto ${imageUrl ? 'py-0' : 'py-14'}`}>
          <div className='w-full border px-3 pb-3 pt-3 rounded-md shadow-[0_0_15px_0] overflow-hidden'>
             <div className='flex items-center gap-2 mb-1'>
                <RiSettings4Line
@@ -60,11 +60,13 @@ export default function CreateBannerPage() {
                <h1 className='text-xl font-black font-mono'>Membuat Banner Baru</h1>
             </div>
             <div className='border-b-2 mb-3'></div>
-            <img
-               src={imageUrl}
-               alt=''
-               className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
-            />
+            {imageUrl && (
+               <img
+                  src={imageUrl}
+                  alt='Banner'
+                  className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
+               />
+            )}
             <div className='w-full'>
                <form
                   onSubmit={handleCreateBanner}
@@ -74,7 +76,7 @@ export default function CreateBannerPage() {
                      htmlFor={'name'}
                      title={'Nama'}
                      name={'name'}
-                     placeholder={'Nama lengkap / Nama Anda'}
+                     placeholder={'Masukan Nama Banner'}
                   />
                   <FormInput
                      onChange={handleUpload}
