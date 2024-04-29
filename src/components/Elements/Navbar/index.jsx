@@ -74,7 +74,7 @@ export default function Navbar() {
                         {dropdownOpen && (
                            <div className='absolute top-[60px] w-48 right-5 bg-white shadow-lg rounded-md py-2'>
                               <Link
-                                 to='/update-profile'
+                                 to='/'
                                  className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
                               >
                                  Profil
@@ -135,7 +135,7 @@ export default function Navbar() {
                               <div className='w-full'>
                                  <div className='flex flex-col justify-center items-center mt-2 bg-white shadow-lg rounded-md py-2'>
                                     <Link
-                                       to='/update-profile'
+                                       to=''
                                        className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
                                     >
                                        Profil
@@ -162,26 +162,26 @@ export default function Navbar() {
                         </div>
                      )}
                      <Link
-                        to='/'
+                        to=''
                         className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
                      >
                         Home
                      </Link>
                      <Link
-                        to='/activity'
+                        to=''
                         className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
                      >
                         Acitivity
                      </Link>
                      <Link
-                        to='/promo'
+                        to=''
                         className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
                      >
                         Promo
                      </Link>
                      {user?.role === 'admin' && (
                         <Link
-                           to='/dasbord/users'
+                           to='/dasboard/users'
                            className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
                         >
                            Dasboard
