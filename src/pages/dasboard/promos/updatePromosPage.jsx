@@ -4,7 +4,7 @@ import Button from '../../../components/Elements/Button';
 
 export default function UpdatePromosPage() {
    return (
-      <div className='flex max-w-xl mx-auto pb-1'>
+      <div className='flex max-w-xl mx-auto pt-3 pb-1'>
          <div className='w-full border px-3 pb-3 pt-3 rounded-md shadow-[0_0_15px_0] overflow-hidden'>
             <div className='flex items-center gap-2 mb-1'>
                <RiSettings4Line
