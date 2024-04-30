@@ -5,11 +5,25 @@ import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
 import { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/isAuth';
+import useUpload from '../../../hooks/isUpload';
 
 export default function UpdateUser() {
    const [user, setUser] = useState({});
-   console.log(user);
+   const [imageUrl, setImageUrl] = useState(null);
    const { usersAuth } = useAuth();
+   const { uploadImage } = useUpload();
+
+   const handleUpload = async (e) => {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+         const response = await uploadImage('upload-image', formData);
+         setImageUrl(response.data.url);
+      } catch (error) {
+         console.log(error);
+      }
+   };
 
    useEffect(() => {
       usersAuth('user', setUser);
@@ -31,7 +45,7 @@ export default function UpdateUser() {
                   <div className='w-full h-auto flex justify-center'>
                      <div className='flex justify-center items-center'>
                         <img
-                           src=''
+                           src={imageUrl || user.profilePictureUrl}
                            alt='profile banner'
                            className='w-full h-[300px] md:h-[400px] object-cover shadow-[0_0_5px_0] rounded-md mb-3'
                         />
@@ -75,6 +89,7 @@ export default function UpdateUser() {
                            />
                         </div>
                         <FormInput
+                           onChange={handleUpload}
                            htmlFor={'profilePictureUrl'}
                            title={'Upload Gambar'}
                            type={'file'}
