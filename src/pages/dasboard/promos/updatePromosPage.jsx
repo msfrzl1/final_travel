@@ -1,18 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { RiSettings4Line } from 'react-icons/ri';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
-import { useParams } from 'react-router-dom';
 import useGetData from '../../../hooks/isGetData';
-import { useEffect, useState } from 'react';
 import useUpload from '../../../hooks/isUpload';
+import useUpdate from '../../../hooks/isUpdate';
 
 export default function UpdatePromosPage() {
    const [promo, setPromo] = useState([]);
    const [imageUrl, setImageUrl] = useState(null);
    const { getData } = useGetData();
+   const { update } = useUpdate();
    const { id } = useParams();
    const { uploadImage } = useUpload();
+   const navigate = useNavigate();
 
    const handleUpload = async (e) => {
       const file = e.target.files[0];
@@ -23,6 +28,42 @@ export default function UpdatePromosPage() {
          setImageUrl(response.data.url);
       } catch (error) {
          console.log(error);
+      }
+   };
+
+   const handleUpdatePromo = async (e) => {
+      e.preventDefault();
+      const dataPromo = {
+         title: e.target.title.value,
+         description: e.target.description.value,
+         imageUrl: imageUrl || promo.imageUrl,
+         terms_condition: e.target.terms_condition.value,
+         promo_code: e.target.promo_code.value,
+         minimum_claim_price: Number(e.target.minimum_claim_price.value),
+         promo_discount_price: Number(e.target.promo_discount_price.value),
+      };
+      try {
+         const response = await update(`update-promo/${id}`, dataPromo);
+         if (response.status === 200) {
+            toast.success(response.data.message);
+            setTimeout(() => {
+               navigate('/dasboard/promo');
+            }, 2000);
+         }
+      } catch (error) {
+         if (dataPromo.title.length <= 0) {
+            toast.error('Masukan nama dengan benar');
+         } else if (dataPromo.description.length <= 0) {
+            toast.error('Masukan deskripsi dengan benar');
+         } else if (dataPromo.terms_condition.length <= 0) {
+            toast.error('Masukan syarat dan ketentuan dengan benar');
+         } else if (dataPromo.promo_code.length <= 0) {
+            toast.error('Masukan kode promo dengan benar');
+         } else if (dataPromo.promo_discount_price <= 0) {
+            toast.error('Masukan diskon promo dengan benar');
+         } else if (dataPromo.minimum_claim_price <= 0) {
+            toast.error('Masukan minimal claim promo dengan benar');
+         }
       }
    };
 
@@ -47,7 +88,10 @@ export default function UpdatePromosPage() {
                   alt=''
                   className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
                />
-               <form className='shadow-[0_0_5px_0] p-3'>
+               <form
+                  onSubmit={handleUpdatePromo}
+                  className='shadow-[0_0_5px_0] p-3'
+               >
                   <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
                      <div className='w-full'>
                         <FormInput
@@ -108,6 +152,18 @@ export default function UpdatePromosPage() {
                </form>
             </div>
          </div>
+         <ToastContainer
+            position='top-center'
+            autoClose={1500}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            pauseOnHover
+            theme='light'
+            transition:Flip
+         />
       </div>
    );
 }
