@@ -1,12 +1,12 @@
 import { RiSettings4Line } from 'react-icons/ri';
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
 import useUpload from '../../../hooks/isUpload';
 import useCreate from '../../../hooks/isCreate';
-import { useNavigate } from 'react-router-dom';
 
 export default function CreatePromosPage() {
    const [imageUrl, setImageUrl] = useState(null);
