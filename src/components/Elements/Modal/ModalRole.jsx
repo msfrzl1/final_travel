@@ -1,9 +1,34 @@
 import { useDispatch } from 'react-redux';
-import FormInput from '../FormInput';
 import { closeModal } from '../../../features/modalRoleSlice';
+import FormInput from '../FormInput';
+import useUpdate from './../../../hooks/isUpdate';
 
-export default function ModalRole() {
+export default function ModalRole({ id }) {
    const dispatch = useDispatch();
+   const { update } = useUpdate();
+
+   const handleUpdateRole = async (id) => {
+      let radioButtons = document.getElementsByName('role');
+
+      // Mencari radio button yang dipilih
+      let role;
+      for (let i = 0; i < radioButtons.length; i++) {
+         if (radioButtons[i].checked) {
+            role = radioButtons[i].value;
+            break;
+         }
+      }
+
+      const dataRole = {
+         role: role,
+      };
+
+      const response = await update(`update-user-role/${id}`, dataRole);
+      if (response.status === 200) {
+         dispatch(closeModal());
+      }
+      window.location.reload();
+   };
 
    return (
       <div className='fixed z-50 inset-0 overflow-y-auto'>
@@ -15,13 +40,13 @@ export default function ModalRole() {
                      <h5 className='text-lg font-bold border-b-2'>Pengaturan User Role</h5>
                   </div>
                   <div className='modal-body py-4'>
-                     <form>
+                     <form onSubmit={handleUpdateRole}>
                         <div className='w-full justify-center flex gap-4'>
                            <div className='flex gap-2'>
                               <FormInput
                                  value='admin'
                                  title='Admin'
-                                 htmlfor='admin'
+                                 htmlFor='admin'
                                  type='radio'
                                  name='role'
                               />
@@ -30,7 +55,7 @@ export default function ModalRole() {
                               <FormInput
                                  value='user'
                                  title='User'
-                                 htmlfor='user'
+                                 htmlFor='user'
                                  type='radio'
                                  name='role'
                               />
@@ -40,6 +65,7 @@ export default function ModalRole() {
                   </div>
                   <div className='modal-footer flex justify-center border-t pt-2'>
                      <button
+                        onClick={() => handleUpdateRole(id)}
                         type='button'
                         className='bg-red-500 hover:bg-red-600 text-white mr-2 px-4 py-2 rounded'
                      >

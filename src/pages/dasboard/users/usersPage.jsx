@@ -9,9 +9,16 @@ import { openModal } from '../../../features/modalRoleSlice';
 
 export default function UserPage() {
    const [users, setUsers] = useState([]);
+   const [userId, setUserId] = useState(null);
+   console.log(userId);
    const { usersAuth } = useAuth();
    const dispatch = useDispatch();
    const isOpen = useSelector((state) => state.modalRole.isOpen);
+
+   const handleUpdateRole = (id) => {
+      setUserId(id);
+      dispatch(openModal());
+   };
 
    useEffect(() => {
       usersAuth('all-user', setUsers);
@@ -59,7 +66,7 @@ export default function UserPage() {
                      </div>
                      <div>
                         <BiEdit
-                           onClick={() => dispatch(openModal(user.id))}
+                           onClick={() => handleUpdateRole(user.id)}
                            className='absolute bg-white/95 top-2 right-2 text-red-700 hover:text-red-800 border rounded-xl cursor-pointer'
                            size={25}
                         />
@@ -67,7 +74,7 @@ export default function UserPage() {
                   </div>
                </div>
             ))}
-            {isOpen ? <ModalRole /> : ''}
+            {isOpen ? <ModalRole id={userId} /> : ''}
          </div>
       </div>
    );
