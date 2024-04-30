@@ -1,8 +1,25 @@
 import { RiSettings4Line } from 'react-icons/ri';
 import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
+import { useState } from 'react';
+import useUpload from '../../../hooks/isUpload';
 
 export default function CreatePromosPage() {
+   const [imageUrl, setImageUrl] = useState(null);
+   const { uploadImage } = useUpload();
+
+   const handleUpload = async (e) => {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+         const response = await uploadImage('upload-image', formData);
+         setImageUrl(response.data.url);
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
    return (
       <div className='flex max-w-xl mx-auto pt-3 pb-1'>
          <div className='w-full border px-3 pb-3 pt-3 rounded-md shadow-[0_0_15px_0] overflow-hidden'>
@@ -16,7 +33,7 @@ export default function CreatePromosPage() {
             <div className='border-b-2 mb-3'></div>
             <div className='w-full'>
                <img
-                  src=''
+                  src={imageUrl}
                   alt=''
                   className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
                />
@@ -34,6 +51,7 @@ export default function CreatePromosPage() {
                            name={'description'}
                         />
                         <FormInput
+                           onChange={handleUpload}
                            htmlFor={'imageUrl'}
                            title={'Upload Gambar'}
                            type={'file'}
