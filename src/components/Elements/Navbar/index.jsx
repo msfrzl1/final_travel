@@ -40,7 +40,7 @@ export default function Navbar() {
                         Home
                      </Link>
                      <Link
-                        to=''
+                        to='/promo-users'
                         className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
                      >
                         Promo
@@ -184,16 +184,16 @@ export default function Navbar() {
                         Home
                      </Link>
                      <Link
-                        to=''
+                        to='/promo-users'
                         className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
                      >
-                        Acitivity
+                        Promo
                      </Link>
                      <Link
                         to=''
                         className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
                      >
-                        Promo
+                        Acitivity
                      </Link>
                      {user?.role === 'admin' && (
                         <Link
