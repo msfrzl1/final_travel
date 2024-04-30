@@ -106,7 +106,7 @@ export default function ActivityUser() {
                      className='px-2 relative'
                   >
                      <div className='rounded-md overflow-hidden border shadow-[0_0_3px_0] flex flex-col my-2'>
-                        <Link to={``}>
+                        <Link to={`/activity-users/${activity.id}`}>
                            <img
                               src={activity.imageUrls[0] || activity.imageUrls[1]}
                               alt={activity.title}

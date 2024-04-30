@@ -1,4 +1,5 @@
 import ActivityUser from '../../pages/activity/activityPage';
+import ActivityDetailUser from '../../pages/activity/activityDetailPage';
 import ActivityPage from '../../pages/dasboard/activitys/activitysPage';
 import BannerPage from '../../pages/dasboard/banners/bannersPage';
 import CreateBannerPage from '../../pages/dasboard/banners/createBannersPage';
@@ -29,6 +30,10 @@ export const routeList = [
    {
       path: '/activity-users',
       element: <ActivityUser />,
+   },
+   {
+      path: '/activity-users/:id',
+      element: <ActivityDetailUser />,
    },
    {
       path: '/login',
