@@ -9,7 +9,6 @@ import useGetData from '../../hooks/isGetData';
 
 export default function ActivityUser() {
    const [activities, setActivities] = useState([]);
-   console.log(activities);
    const [categorys, setCategorys] = useState([]);
    const { getData } = useGetData();
 
