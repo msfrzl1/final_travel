@@ -22,7 +22,7 @@ export default function PromoPage() {
                   size={25}
                   className='text-red-500'
                />
-               <h1 className='text-xl font-black font-mono'>Pengaturan Banner</h1>
+               <h1 className='text-xl font-black font-mono'>Pengaturan Promo</h1>
             </div>
             <Link
                to=''
@@ -32,7 +32,7 @@ export default function PromoPage() {
                   className=' text-red-400 hover:text-red-500 cursor-pointer'
                   size={20}
                />
-               <h1 className='font-semibold text-xs'>Membuat Banner Baru</h1>
+               <h1 className='font-semibold text-xs'>Membuat Promo Baru</h1>
             </Link>
          </div>
          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
@@ -49,7 +49,7 @@ export default function PromoPage() {
                   <div className='absolute bottom-0 left-0 right-0 bg-black text-white px-2 py-1'>
                      <h1 className='text-xs font-semibold'>{promo.title}</h1>
                   </div>
-                  <Link to=''>
+                  <Link to={`/dasboard/promo/update-promo/${promo.id}`}>
                      <BiEdit
                         className='absolute bg-white/95 top-2 right-2 text-indigo-700 hover:text-indigo-800 border rounded-xl'
                         size={30}

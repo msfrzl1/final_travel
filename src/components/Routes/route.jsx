@@ -15,6 +15,7 @@ import RegisterPage from '../../pages/register';
 import LayoutDasboard from '../Layouts/LayoutDasboard';
 import UpdateUser from '../../pages/dasboard/users/updateUserPage';
 import ProtectedRoute from './protectedRoute';
+import UpdatePromosPage from '../../pages/dasboard/promos/updatePromosPage';
 
 export const routeList = [
    {
@@ -76,6 +77,10 @@ export const routeList = [
          {
             path: 'promo',
             element: <PromoPage />,
+         },
+         {
+            path: 'promo/update-promo/:id',
+            element: <UpdatePromosPage />,
          },
          {
             path: 'category',

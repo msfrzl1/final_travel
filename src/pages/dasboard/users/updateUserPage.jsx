@@ -132,7 +132,7 @@ export default function UpdateUser() {
                            placeholder={'08xxxxxxx'}
                         />
                         <Button
-                           className='bg-indigo-600 hover:bg-indigo-700 ease-in duration-150'
+                           className='bg-indigo-600 hover:bg-indigo-700 ease-in duration-150 w-full mt-1'
                            type='submit'
                         >
                            Edit Profile

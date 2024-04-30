@@ -82,7 +82,6 @@ export default function UpdateBannersPage() {
                      htmlFor={'name'}
                      title={'Nama'}
                      name={'name'}
-                     placeholder={'Masukan Nama Banner'}
                   />
                   <FormInput
                      onChange={handleUpload}
