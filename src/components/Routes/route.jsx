@@ -16,6 +16,7 @@ import LayoutDasboard from '../Layouts/LayoutDasboard';
 import UpdateUser from '../../pages/dasboard/users/updateUserPage';
 import ProtectedRoute from './protectedRoute';
 import UpdatePromosPage from '../../pages/dasboard/promos/updatePromosPage';
+import CreatePromosPage from '../../pages/dasboard/promos/createPromosPage';
 
 export const routeList = [
    {
@@ -81,6 +82,10 @@ export const routeList = [
          {
             path: 'promo/update-promo/:id',
             element: <UpdatePromosPage />,
+         },
+         {
+            path: 'promo/create-promo',
+            element: <CreatePromosPage />,
          },
          {
             path: 'category',

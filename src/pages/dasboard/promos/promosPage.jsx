@@ -25,7 +25,7 @@ export default function PromoPage() {
                <h1 className='text-xl font-black font-mono'>Pengaturan Promo</h1>
             </div>
             <Link
-               to=''
+               to='/dasboard/promo/create-promo'
                className='flex gap-2 items-center'
             >
                <MdOutlineLibraryAdd
