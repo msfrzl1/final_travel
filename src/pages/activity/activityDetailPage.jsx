@@ -10,7 +10,6 @@ import { useEffect, useState } from 'react';
 export default function ActivityDetailUser() {
    const [activity, setActivity] = useState([]);
    const [mapHtml, setMapHtml] = useState('');
-   console.log(activity);
    const { getData } = useGetData();
    const { id } = useParams();
 
