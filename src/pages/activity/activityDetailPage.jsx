@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Link, useParams } from 'react-router-dom';
-import Layout from '../../components/Layouts/Layout';
 import { MdPreview } from 'react-icons/md';
 import { IoEarth } from 'react-icons/io5';
 import { FaSackDollar } from 'react-icons/fa6';
-import useGetData from '../../hooks/isGetData';
 import { useEffect, useState } from 'react';
+import Layout from '../../components/Layouts/Layout';
+import useGetData from '../../hooks/isGetData';
 
 export default function ActivityDetailUser() {
    const [activity, setActivity] = useState([]);
