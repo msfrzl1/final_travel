@@ -9,10 +9,12 @@ import useGetData from '../../hooks/isGetData';
 
 export default function ActivityUser() {
    const [activities, setActivities] = useState([]);
+   const [categorys, setCategorys] = useState([]);
    const { getData } = useGetData();
 
    useEffect(() => {
       getData('activities', setActivities);
+      getData('categories', setCategorys);
    }, []);
 
    return (
@@ -32,7 +34,35 @@ export default function ActivityUser() {
                <div className='font-bold text-xl w-full'>
                   <div className='px-2'>Menampikan {activities.length} hasil activity</div>
                </div>
+               <div className='flex w-full items-center justify-center md:justify-end gap-2'>
+                  <div className='flex w-full justify-end md:flex-row flex-col items-center gap-2'>
+                     <select
+                        name='categoryId'
+                        id='categoryId'
+                        className='border rounded-md py-[0.2rem] w-full'
+                     >
+                        {categorys.map((category) => (
+                           <option
+                              value={category.id}
+                              key={category.id}
+                              selected={category.id}
+                           >
+                              {category.name}
+                           </option>
+                        ))}
+                     </select>
+                     <button className='w-full py-1 rounded bg-green-500 hover:bg-green-600 text-white'>Filter</button>
+                     <button className='w-full py-1 rounded bg-blue-500 hover:bg-blue-600 text-white'>Reset</button>
+                  </div>
+               </div>
             </div>
+            {activities.length === 0 && (
+               <div className='w-full'>
+                  <div className='w-full flex justify-center items-center h-[354px]'>
+                     <h1 className='text-xl font-bold font-mono'>No activity found</h1>
+                  </div>
+               </div>
+            )}
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-[0.7rem]'>
                {activities.map((activity) => (
                   <div
