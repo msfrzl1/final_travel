@@ -9,6 +9,7 @@ import useGetData from '../../hooks/isGetData';
 
 export default function ActivityUser() {
    const [activities, setActivities] = useState([]);
+   console.log(activities);
    const [categorys, setCategorys] = useState([]);
    const { getData } = useGetData();
 
@@ -16,6 +17,21 @@ export default function ActivityUser() {
       getData('activities', setActivities);
       getData('categories', setCategorys);
    }, []);
+
+   const handleActivityByCategoryId = async (e) => {
+      e.preventDefault();
+      const select = document.getElementById('categoryId');
+      const categoryId = select.value;
+      if (categoryId === 'Select') {
+         return;
+      }
+      try {
+         const response = await getData(`activities-by-category/${categoryId}`, setActivities);
+         setActivities(response.data.data);
+      } catch (error) {
+         console.log(error);
+      }
+   };
 
    return (
       <Layout>
@@ -51,7 +67,12 @@ export default function ActivityUser() {
                            </option>
                         ))}
                      </select>
-                     <button className='w-full py-1 rounded bg-green-500 hover:bg-green-600 text-white'>Filter</button>
+                     <button
+                        onClick={handleActivityByCategoryId}
+                        className='w-full py-1 rounded bg-green-500 hover:bg-green-600 text-white'
+                     >
+                        Filter
+                     </button>
                      <button className='w-full py-1 rounded bg-blue-500 hover:bg-blue-600 text-white'>Reset</button>
                   </div>
                </div>
