@@ -24,7 +24,7 @@ export default function PromoDetailUser() {
             </Link>
             <div>/</div>
             <Link
-               to='/promo'
+               to='/promo-users'
                className='hover:underline'
             >
                promo-users
