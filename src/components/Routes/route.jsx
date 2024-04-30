@@ -14,6 +14,7 @@ import PromoUser from '../../pages/promo/promoPage';
 import RegisterPage from '../../pages/register';
 import LayoutDasboard from '../Layouts/LayoutDasboard';
 import UpdateUser from '../../pages/dasboard/users/updateUserPage';
+import ProtectedRoute from './protectedRoute';
 
 export const routeList = [
    {
@@ -50,7 +51,11 @@ export const routeList = [
    },
    {
       path: '/dasboard',
-      element: <LayoutDasboard />,
+      element: (
+         <ProtectedRoute>
+            <LayoutDasboard />
+         </ProtectedRoute>
+      ),
       children: [
          {
             path: 'users',
