@@ -33,6 +33,16 @@ export default function ActivityUser() {
       }
    };
 
+   const handleReset = async () => {
+      try {
+         const response = await getData('activities', setActivities);
+         setActivities(response.data.data);
+         document.getElementById('categoryId').value = 'Select';
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
    return (
       <Layout>
          <div className='pt-20 flex flex-col justify-center px-2 md:px-5 pb-4'>
@@ -73,7 +83,12 @@ export default function ActivityUser() {
                      >
                         Filter
                      </button>
-                     <button className='w-full py-1 rounded bg-blue-500 hover:bg-blue-600 text-white'>Reset</button>
+                     <button
+                        onClick={handleReset}
+                        className='w-full py-1 rounded bg-blue-500 hover:bg-blue-600 text-white'
+                     >
+                        Reset
+                     </button>
                   </div>
                </div>
             </div>
