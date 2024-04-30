@@ -15,13 +15,13 @@ export default function AuthLayoutDasbord() {
       { icon: <GiVerticalBanner size={25} />, name: 'Banner', link: '/dasboard/banner' },
       { icon: <CgDollar size={25} />, name: 'Promo', link: '/dasboard/promo' },
       { icon: <TbCategory2 size={25} />, name: 'Category', link: '/dasboard/category' },
-      { icon: <BsActivity size={25} />, name: 'Activity', link: '/dasboard/Activity' },
+      { icon: <BsActivity size={25} />, name: 'Activity', link: '/dasboard/activity' },
    ];
 
    return (
       <Layout>
          <div className='flex'>
-            <div className='h-screen border-r bg-white border-gray-200 shadow-[0_0_5px_0] w-14 md:w-44 pt-[4rem] fixed z-[100]'>
+            <div className='h-screen border-r bg-white border-gray-200 shadow-[0_0_5px_0] w-[4.2rem] md:w-44 pt-[4rem] fixed z-[100]'>
                <h1 className='font-bold font-mono text-xl text-center pb-10 hidden md:block'>Dasboard</h1>
                <div className='flex flex-col items-center md:mx-auto md:pt-0 pt-20 space-y-5 px-1 md:px-2 w-full'>
                   {sideList.map((item, index) => (

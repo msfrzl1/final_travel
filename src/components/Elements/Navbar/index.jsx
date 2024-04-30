@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { openModal } from '../../../features/modalLogoutSlice';
+import { useLocation } from 'react-router-dom';
 import ModalLogout from '../Modal/ModalLogout';
 
 export default function Navbar() {
@@ -14,6 +15,7 @@ export default function Navbar() {
    const dispatch = useDispatch();
    const isOpen = useSelector((state) => state.modalLogout.isOpen);
    const user = JSON.parse(localStorage.getItem('user'));
+   const path = useLocation().pathname;
 
    const toggleButton = () => {
       setShowMenu(!showMenu);
@@ -35,26 +37,40 @@ export default function Navbar() {
                   <div className='flex font-semibold text-sm'>
                      <Link
                         to='/'
-                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
+                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer ${
+                           path === '/' ? 'bg-gray-200' : ''
+                        }`}
                      >
                         Home
                      </Link>
                      <Link
                         to='/promo-users'
-                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
+                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer ${
+                           path === '/promo-users' ? 'bg-gray-200' : ''
+                        }`}
                      >
                         Promo
                      </Link>
                      <Link
                         to='/activity-users'
-                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
+                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer ${
+                           path === '/activity-users' ? 'bg-gray-200' : ''
+                        }`}
                      >
                         Activity
                      </Link>
                      {user?.role === 'admin' && (
                         <Link
                            to='/dasboard/users'
-                           className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
+                           className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer ${
+                              path === '/dasboard/users' ||
+                              path === '/dasboard/banner' ||
+                              path === '/dasboard/promo' ||
+                              path === '/dasboard/category' ||
+                              path === '/dasboard/activity'
+                                 ? 'bg-gray-200'
+                                 : ''
+                           }`}
                         >
                            Dasboard
                         </Link>
@@ -179,26 +195,40 @@ export default function Navbar() {
                      )}
                      <Link
                         to='/'
-                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
+                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer ${
+                           path === '/' ? 'bg-gray-200' : ''
+                        }`}
                      >
                         Home
                      </Link>
                      <Link
                         to='/promo-users'
-                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
+                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer ${
+                           path === '/promo-users' ? 'bg-gray-200' : ''
+                        }`}
                      >
                         Promo
                      </Link>
                      <Link
                         to='/activity/users'
-                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
+                        className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer ${
+                           path === '/activity-users' ? 'bg-gray-200' : ''
+                        }`}
                      >
                         Acitivity
                      </Link>
                      {user?.role === 'admin' && (
                         <Link
                            to='/dasboard/users'
-                           className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
+                           className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer  ${
+                              path === '/dasboard/users' ||
+                              path === '/dasboard/banner' ||
+                              path === '/dasboard/promo' ||
+                              path === '/dasboard/category' ||
+                              path === '/dasboard/activity'
+                                 ? 'bg-gray-200'
+                                 : ''
+                           }`}
                         >
                            Dasboard
                         </Link>
