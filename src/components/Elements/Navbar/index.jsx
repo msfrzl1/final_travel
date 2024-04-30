@@ -46,7 +46,7 @@ export default function Navbar() {
                         Promo
                      </Link>
                      <Link
-                        to=''
+                        to='/activity-users'
                         className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
                      >
                         Activity
@@ -190,7 +190,7 @@ export default function Navbar() {
                         Promo
                      </Link>
                      <Link
-                        to=''
+                        to='/activity/users'
                         className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
                      >
                         Acitivity
