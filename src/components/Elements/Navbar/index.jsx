@@ -80,7 +80,7 @@ export default function Navbar() {
                         {dropdownOpen && (
                            <div className='absolute top-[60px] w-48 right-5 bg-white shadow-lg rounded-md py-2'>
                               <Link
-                                 to='/'
+                                 to=''
                                  className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
                               >
                                  Profil
