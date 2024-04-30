@@ -1,17 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { BiEdit } from 'react-icons/bi';
 import { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 import Layout from '../../../components/Layouts/Layout';
 import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
 import useAuth from '../../../hooks/isAuth';
 import useUpload from '../../../hooks/isUpload';
+import useUpdate from '../../../hooks/isUpdate';
 
 export default function UpdateUser() {
    const [user, setUser] = useState({});
    const [imageUrl, setImageUrl] = useState(null);
    const { usersAuth } = useAuth();
    const { uploadImage } = useUpload();
+   const { update } = useUpdate();
+   const navigate = useNavigate();
 
    const handleUpload = async (e) => {
       const file = e.target.files[0];
@@ -22,6 +28,25 @@ export default function UpdateUser() {
          setImageUrl(response.data.url);
       } catch (error) {
          console.log(error);
+      }
+   };
+
+   const handleUpdateProfile = async (e) => {
+      e.preventDefault();
+      const dataUser = {
+         email: e.target.email.value,
+         name: e.target.name.value,
+         profilePictureUrl: imageUrl,
+         phoneNumber: e.target.phoneNumber.value,
+      };
+      const response = await update('update-profile', dataUser);
+      if (response.status === 200) {
+         const user = JSON.parse(localStorage.getItem('user'));
+         localStorage.setItem('user', JSON.stringify({ ...user, ...dataUser }));
+         toast.success(response.data.message);
+         setTimeout(() => {
+            navigate('/dasboard/users');
+         }, 2000);
       }
    };
 
@@ -52,7 +77,10 @@ export default function UpdateUser() {
                      </div>
                   </div>
                   <div className='w-full'>
-                     <form className='shadow-[0_0_5px_0] p-3'>
+                     <form
+                        onSubmit={handleUpdateProfile}
+                        className='shadow-[0_0_5px_0] p-3'
+                     >
                         <div className='text-gray-400'>
                            <FormInput
                               defaultValue={user.id}
@@ -113,6 +141,18 @@ export default function UpdateUser() {
                   </div>
                </div>
             </div>
+            <ToastContainer
+               position='top-center'
+               autoClose={1500}
+               hideProgressBar={false}
+               newestOnTop={false}
+               closeOnClick
+               rtl={false}
+               pauseOnFocusLoss
+               pauseOnHover
+               theme='light'
+               transition:Flip
+            />
          </div>
       </Layout>
    );
