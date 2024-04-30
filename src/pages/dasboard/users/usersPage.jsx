@@ -2,11 +2,16 @@
 import { useEffect, useState } from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { RiSettings4Line } from 'react-icons/ri';
+import { useDispatch, useSelector } from 'react-redux';
 import useAuth from '../../../hooks/isAuth';
+import ModalRole from '../../../components/Elements/Modal/ModalRole';
+import { openModal } from '../../../features/modalRoleSlice';
 
 export default function UserPage() {
    const [users, setUsers] = useState([]);
    const { usersAuth } = useAuth();
+   const dispatch = useDispatch();
+   const isOpen = useSelector((state) => state.modalRole.isOpen);
 
    useEffect(() => {
       usersAuth('all-user', setUsers);
@@ -54,6 +59,7 @@ export default function UserPage() {
                      </div>
                      <div>
                         <BiEdit
+                           onClick={() => dispatch(openModal(user.id))}
                            className='absolute bg-white/95 top-2 right-2 text-red-700 hover:text-red-800 border rounded-xl cursor-pointer'
                            size={25}
                         />
@@ -61,6 +67,7 @@ export default function UserPage() {
                   </div>
                </div>
             ))}
+            {isOpen ? <ModalRole /> : ''}
          </div>
       </div>
    );

@@ -1,6 +1,10 @@
+import { useDispatch } from 'react-redux';
 import FormInput from '../FormInput';
+import { closeModal } from '../../../features/modalRoleSlice';
 
 export default function ModalRole() {
+   const dispatch = useDispatch();
+
    return (
       <div className='fixed z-50 inset-0 overflow-y-auto'>
          <div className='flex items-center justify-center min-h-screen'>
@@ -42,6 +46,7 @@ export default function ModalRole() {
                         Confirm
                      </button>
                      <button
+                        onClick={() => dispatch(closeModal())}
                         type='button'
                         className='bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded'
                      >
