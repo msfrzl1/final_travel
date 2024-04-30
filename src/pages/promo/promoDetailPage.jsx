@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import Layout from '../../components/Layouts/Layout';
 import useGetData from '../../hooks/isGetData';
-import { useEffect, useState } from 'react';
 
 export default function PromoDetailUser() {
    const [promo, setPromo] = useState([]);
    const { id } = useParams();
-   console.log(promo);
    const { getData } = useGetData();
 
    useEffect(() => {
       getData(`promo/${id}`, setPromo);
    }, []);
+
    return (
       <Layout>
          <div className='flex gap-2 text-xs font-semibold mb-3 px-3 pt-20'>
