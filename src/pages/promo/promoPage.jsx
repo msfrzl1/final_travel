@@ -37,7 +37,7 @@ export default function PromoUser() {
                      key={promo.id}
                      className='relative shadow-[0_0_3px_0] rounded-md m-2 overflow-hidden'
                   >
-                     <Link to={``}>
+                     <Link to={`/promo-users/${promo.id}`}>
                         <div className='rounded-t-md overflow-hidden border'>
                            <img
                               src={promo.imageUrl}

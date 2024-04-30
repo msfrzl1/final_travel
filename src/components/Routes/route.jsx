@@ -7,6 +7,7 @@ import PromoPage from '../../pages/dasboard/promos/promosPage';
 import UserPage from '../../pages/dasboard/users/usersPage';
 import HomePage from '../../pages/home';
 import LoginPage from '../../pages/login';
+import PromoDetailUser from '../../pages/promo/promoDetailPage';
 import PromoUser from '../../pages/promo/promoPage';
 import RegisterPage from '../../pages/register';
 import LayoutDasboard from '../Layouts/LayoutDasboard';
@@ -19,6 +20,10 @@ export const routeList = [
    {
       path: '/promo-users',
       element: <PromoUser />,
+   },
+   {
+      path: '/promo-users/:id',
+      element: <PromoDetailUser />,
    },
    {
       path: '/login',
