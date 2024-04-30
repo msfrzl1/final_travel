@@ -5,11 +5,26 @@ import Button from '../../../components/Elements/Button';
 import { useParams } from 'react-router-dom';
 import useGetData from '../../../hooks/isGetData';
 import { useEffect, useState } from 'react';
+import useUpload from '../../../hooks/isUpload';
 
 export default function UpdatePromosPage() {
    const [promo, setPromo] = useState([]);
+   const [imageUrl, setImageUrl] = useState(null);
    const { getData } = useGetData();
    const { id } = useParams();
+   const { uploadImage } = useUpload();
+
+   const handleUpload = async (e) => {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+         const response = await uploadImage('upload-image', formData);
+         setImageUrl(response.data.url);
+      } catch (error) {
+         console.log(error);
+      }
+   };
 
    useEffect(() => {
       getData(`promo/${id}`, setPromo);
@@ -28,7 +43,7 @@ export default function UpdatePromosPage() {
             <div className='border-b-2 mb-3'></div>
             <div className='w-full'>
                <img
-                  src=''
+                  src={imageUrl || promo.imageUrl}
                   alt=''
                   className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
                />
@@ -48,6 +63,7 @@ export default function UpdatePromosPage() {
                            name={'description'}
                         />
                         <FormInput
+                           onChange={handleUpload}
                            htmlFor={'imageUrl'}
                            title={'Upload Gambar'}
                            type={'file'}
