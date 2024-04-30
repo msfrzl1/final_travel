@@ -5,11 +5,16 @@ import UpdateBannersPage from '../../pages/dasboard/banners/updateBannersPage';
 import CategoryPage from '../../pages/dasboard/category/categorysPage';
 import PromoPage from '../../pages/dasboard/promos/promosPage';
 import UserPage from '../../pages/dasboard/users/usersPage';
+import HomePage from '../../pages/home';
 import LoginPage from '../../pages/login';
 import RegisterPage from '../../pages/register';
 import LayoutDasboard from '../Layouts/LayoutDasboard';
 
 export const routeList = [
+   {
+      path: '/',
+      element: <HomePage />,
+   },
    {
       path: '/login',
       element: <LoginPage />,

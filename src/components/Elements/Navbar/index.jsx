@@ -34,7 +34,7 @@ export default function Navbar() {
                <div className='hidden md:block'>
                   <div className='flex font-semibold text-sm'>
                      <Link
-                        to=''
+                        to='/'
                         className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
                      >
                         Home
@@ -178,7 +178,7 @@ export default function Navbar() {
                         </div>
                      )}
                      <Link
-                        to=''
+                        to='/'
                         className={`hover:bg-gray-200 ease-in-out duration-200 py-1 px-3 rounded-full cursor-pointer`}
                      >
                         Home

@@ -46,7 +46,7 @@ export default function Footer() {
                   <h1 className='font-medium text-sm text-center pb-2'>Newsletter</h1>
                   <nav className='flex flex-col gap-2 text-xs'>
                      <FormInput placeholder='example.com' />
-                     <Button className='bg-orange-500 py-2.5'>Suscribe</Button>
+                     <Button className='bg-orange-500 py-2'>Suscribe</Button>
                   </nav>
                </div>
             </div>
