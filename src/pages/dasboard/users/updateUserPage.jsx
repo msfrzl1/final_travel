@@ -1,9 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { BiEdit } from 'react-icons/bi';
 import Layout from '../../../components/Layouts/Layout';
 import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
+import { useEffect, useState } from 'react';
+import useAuth from '../../../hooks/isAuth';
 
 export default function UpdateUser() {
+   const [user, setUser] = useState({});
+   console.log(user);
+   const { usersAuth } = useAuth();
+
+   useEffect(() => {
+      usersAuth('user', setUser);
+   }, []);
+
    return (
       <Layout>
          <div className='px-3 md:pt-[4.8rem] pt-16 pb-1'>
@@ -30,14 +41,16 @@ export default function UpdateUser() {
                      <form className='shadow-[0_0_5px_0] p-3'>
                         <div className='text-gray-400'>
                            <FormInput
-                              htmlFor='id'
-                              title='ID'
-                              name='id'
+                              defaultValue={user.id}
+                              htmlFor={'id'}
+                              title={'ID'}
+                              name={'id'}
                               disabled
                               readOnly
                            />
                         </div>
                         <FormInput
+                           defaultValue={user.email}
                            htmlFor={'email'}
                            title={'E-mail'}
                            type={'email'}
@@ -45,6 +58,7 @@ export default function UpdateUser() {
                            placeholder={'contoh123@mail.com'}
                         />
                         <FormInput
+                           defaultValue={user.name}
                            htmlFor={'name'}
                            title={'Nama'}
                            name={'name'}
@@ -52,6 +66,7 @@ export default function UpdateUser() {
                         />
                         <div className='text-gray-400'>
                            <FormInput
+                              defaultValue={user.role}
                               htmlFor={'role'}
                               title={'Peran'}
                               name={'role'}
@@ -66,6 +81,7 @@ export default function UpdateUser() {
                            name={'profilePictureUrl'}
                         />
                         <FormInput
+                           defaultValue={user.phoneNumber}
                            htmlFor={'phoneNumber'}
                            title={'Nomor Telepon'}
                            type={'number'}
