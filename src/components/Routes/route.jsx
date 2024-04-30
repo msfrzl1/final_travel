@@ -13,6 +13,7 @@ import PromoDetailUser from '../../pages/promo/promoDetailPage';
 import PromoUser from '../../pages/promo/promoPage';
 import RegisterPage from '../../pages/register';
 import LayoutDasboard from '../Layouts/LayoutDasboard';
+import UpdateUser from '../../pages/dasboard/users/updateUserPage';
 
 export const routeList = [
    {
@@ -42,6 +43,10 @@ export const routeList = [
    {
       path: '/register',
       element: <RegisterPage />,
+   },
+   {
+      path: 'users/:id',
+      element: <UpdateUser />,
    },
    {
       path: '/dasboard',
