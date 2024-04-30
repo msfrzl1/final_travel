@@ -1,12 +1,18 @@
 import { RiSettings4Line } from 'react-icons/ri';
+import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
-import { useState } from 'react';
 import useUpload from '../../../hooks/isUpload';
+import useCreate from '../../../hooks/isCreate';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreatePromosPage() {
    const [imageUrl, setImageUrl] = useState(null);
    const { uploadImage } = useUpload();
+   const { create } = useCreate();
+   const navigate = useNavigate();
 
    const handleUpload = async (e) => {
       const file = e.target.files[0];
@@ -17,6 +23,50 @@ export default function CreatePromosPage() {
          setImageUrl(response.data.url);
       } catch (error) {
          console.log(error);
+      }
+   };
+
+   const handleCreatePromo = async (e) => {
+      e.preventDefault();
+      const dataPromo = {
+         title: e.target.title.value,
+         description: e.target.description.value,
+         imageUrl: imageUrl,
+         terms_condition: e.target.terms_condition.value,
+         promo_code: e.target.promo_code.value,
+         promo_discount_price: Number(e.target.promo_discount_price.value),
+         minimum_claim_price: Number(e.target.minimum_claim_price.value),
+      };
+
+      if (dataPromo.title.length <= 0) {
+         toast.error('Masukan nama dengan benar');
+         return;
+      } else if (dataPromo.description.length <= 0) {
+         toast.error('Masukan deskripsi dengan benar');
+         return;
+      } else if (dataPromo.imageUrl === null) {
+         toast.error('Masukan gambar promo dengan benar');
+         return;
+      } else if (dataPromo.terms_condition.length <= 0) {
+         toast.error('Masukan syarat dan ketentuan dengan benar');
+         return;
+      } else if (dataPromo.promo_code.length <= 0) {
+         toast.error('Masukan kode promo dengan benar');
+         return;
+      } else if (dataPromo.promo_discount_price <= 0) {
+         toast.error('Masukan diskon promo dengan benar');
+         return;
+      } else if (dataPromo.minimum_claim_price <= 0) {
+         toast.error('Masukan minimum claim price dengan benar');
+         return;
+      }
+
+      const response = await create('create-promo', dataPromo);
+      if (response.status === 200) {
+         toast.success(response.data.message);
+         setTimeout(() => {
+            navigate('/dasboard/promo');
+         }, 2000);
       }
    };
 
@@ -37,7 +87,10 @@ export default function CreatePromosPage() {
                   alt=''
                   className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
                />
-               <form className='shadow-[0_0_5px_0] p-3'>
+               <form
+                  onSubmit={handleCreatePromo}
+                  className='shadow-[0_0_5px_0] p-3'
+               >
                   <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
                      <div className='w-full'>
                         <FormInput
@@ -92,6 +145,18 @@ export default function CreatePromosPage() {
                </form>
             </div>
          </div>
+         <ToastContainer
+            position='top-center'
+            autoClose={1500}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            pauseOnHover
+            theme='light'
+            transition:Flip
+         />
       </div>
    );
 }
