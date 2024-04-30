@@ -144,7 +144,7 @@ export default function UpdatePromosPage() {
                      </div>
                   </div>
                   <Button
-                     className='bg-indigo-600 hover:bg-indigo-700 w-full'
+                     className='bg-indigo-600 hover:bg-indigo-700 w-full mt-1'
                      type='submit'
                   >
                      Edit Promo
