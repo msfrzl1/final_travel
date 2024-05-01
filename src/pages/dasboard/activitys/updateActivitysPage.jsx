@@ -2,11 +2,14 @@
 import { MdDeleteForever } from 'react-icons/md';
 import { RiSettings4Line } from 'react-icons/ri';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
 import useGetData from '../../../hooks/isGetData';
 import useUpload from '../../../hooks/isUpload';
+import useUpdate from '../../../hooks/isUpdate';
 
 export default function UpdateActivitysPage() {
    const [activity, setActivity] = useState([]);
@@ -14,7 +17,9 @@ export default function UpdateActivitysPage() {
    const [categorys, setCategorys] = useState([]);
    const { getData } = useGetData();
    const { uploadImage } = useUpload();
+   const { update } = useUpdate();
    const { id } = useParams();
+   const navigate = useNavigate();
 
    const handleUpload = async (e) => {
       const file = e.target.files[0];
@@ -25,6 +30,65 @@ export default function UpdateActivitysPage() {
          setImageUrl([...imageUrl, response.data.url]);
       } catch (error) {
          console.log(error);
+      }
+   };
+
+   const handleUpdateActivity = async (e) => {
+      e.preventDefault();
+      const select = document.getElementById('categoryId');
+      const categoryId = select.value;
+      if (categoryId === 'Select') {
+         return;
+      }
+
+      const dataActivity = {
+         categoryId: categoryId,
+         title: e.target.title.value,
+         description: e.target.description.value,
+         imageUrls: imageUrl || activity.imageUrls,
+         price: Number(e.target.price.value),
+         price_discount: Number(e.target.price_discount.value),
+         rating: Number(e.target.rating.value),
+         total_reviews: Number(e.target.total_reviews.value),
+         facilities: e.target.facilities.value,
+         address: e.target.address.value,
+         province: e.target.province.value,
+         city: e.target.city.value,
+         location_maps: e.target.location_maps.value,
+      };
+
+      try {
+         const response = await update(`update-activity/${id}`, dataActivity);
+         if (response.status === 200) {
+            toast.success(response.data.message);
+            setTimeout(() => {
+               navigate('/dasboard/activity');
+            }, 2000);
+         }
+      } catch (error) {
+         if (dataActivity.title.length <= 0) {
+            toast.error('Masukan nama dengan benar');
+         } else if (dataActivity.description.length <= 0) {
+            toast.error('Masukan deskripsi dengan benar');
+         } else if (dataActivity.price <= 0) {
+            toast.error('Masukan harga dengan benar');
+         } else if (dataActivity.price_discount <= 0) {
+            toast.error('Masukan diskon dengan benar');
+         } else if (dataActivity.rating <= 0) {
+            toast.error('Masukan rating dengan benar');
+         } else if (dataActivity.total_reviews <= 0) {
+            toast.error('Masukan total review dengan benar');
+         } else if (dataActivity.facilities.length <= 0) {
+            toast.error('Masukan fasilitas dengan benar');
+         } else if (dataActivity.address.length <= 0) {
+            toast.error('Masukan alamat dengan benar');
+         } else if (dataActivity.province.length <= 0) {
+            toast.error('Masukan provinsi dengan benar');
+         } else if (dataActivity.city.length <= 0) {
+            toast.error('Masukan kota dengan benar');
+         } else if (dataActivity.location_maps.length <= 0) {
+            toast.error('Masukan lokasi maps dengan benar');
+         }
       }
    };
 
@@ -70,7 +134,7 @@ export default function UpdateActivitysPage() {
                   ))}
             </div>
             <div className='w-full border px-3 pb-3 rounded-md shadow-[0_0_5px_0]'>
-               <form>
+               <form onSubmit={handleUpdateActivity}>
                   <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
                      <div className='w-full'>
                         <div className='flex flex-col my-2'>
@@ -186,6 +250,18 @@ export default function UpdateActivitysPage() {
                </form>
             </div>
          </div>
+         <ToastContainer
+            position='top-center'
+            autoClose={1500}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            pauseOnHover
+            theme='light'
+            transition:Flip
+         />
       </div>
    );
 }
