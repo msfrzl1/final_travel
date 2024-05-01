@@ -82,11 +82,13 @@ export default function CreatePromosPage() {
             </div>
             <div className='border-b-2 mb-3'></div>
             <div className='w-full'>
-               <img
-                  src={imageUrl}
-                  alt='promo'
-                  className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
-               />
+               {imageUrl && (
+                  <img
+                     src={imageUrl}
+                     alt='promo'
+                     className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
+                  />
+               )}
                <form
                   onSubmit={handleCreatePromo}
                   className='shadow-[0_0_5px_0] p-3'

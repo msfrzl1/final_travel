@@ -25,7 +25,7 @@ export default function UserPage() {
       dispatch(openModal());
    };
 
-   const handleNextPage = async () => {
+   const handleNextPage = () => {
       setCurrentPage(currentPage + 1);
    };
 

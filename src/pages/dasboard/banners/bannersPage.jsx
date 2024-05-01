@@ -25,7 +25,7 @@ export default function BannerPage() {
       }
    };
 
-   const handleNextPage = async () => {
+   const handleNextPage = () => {
       setCurrentPage(currentPage + 1);
    };
 
