@@ -6,11 +6,25 @@ import { TbCurrencyDollarOff } from 'react-icons/tb';
 import { useEffect, useState } from 'react';
 import Layout from '../../components/Layouts/Layout';
 import useGetData from '../../hooks/isGetData';
+import Button from '../../components/Elements/Button';
 
 export default function ActivityUser() {
    const [activities, setActivities] = useState([]);
    const [categorys, setCategorys] = useState([]);
+   const [currentPage, setCurrentPage] = useState(1);
+   const [activityPerPage] = useState(8);
+   const lastActivity = currentPage * activityPerPage;
+   const firstActivity = lastActivity - activityPerPage;
+   const currentActivity = activities.slice(firstActivity, lastActivity);
    const { getData } = useGetData();
+
+   const handleNextPage = () => {
+      setCurrentPage(currentPage + 1);
+   };
+
+   const handlePrevPage = () => {
+      setCurrentPage(currentPage - 1);
+   };
 
    useEffect(() => {
       getData('activities', setActivities);
@@ -91,7 +105,7 @@ export default function ActivityUser() {
                   </div>
                </div>
             </div>
-            {activities.length === 0 && (
+            {currentActivity.length === 0 && (
                <div className='w-full'>
                   <div className='w-full flex justify-center items-center h-[354px]'>
                      <h1 className='text-xl font-bold font-mono'>No activity found</h1>
@@ -99,7 +113,7 @@ export default function ActivityUser() {
                </div>
             )}
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-[0.7rem]'>
-               {activities.map((activity) => (
+               {currentActivity.map((activity) => (
                   <div
                      key={activity.id}
                      className='px-2 relative'
@@ -146,6 +160,22 @@ export default function ActivityUser() {
                      </div>
                   </div>
                ))}
+            </div>
+            <div className='mt-3 flex justify-center'>
+               <Button
+                  onClick={handlePrevPage}
+                  disabled={currentPage === 1}
+                  className='mr-2 py-2 bg-slate-800 text-white rounded disabled:bg-gray-700 disabled:text-gray-400'
+               >
+                  &lt;-- Prev
+               </Button>
+               <Button
+                  onClick={handleNextPage}
+                  disabled={currentPage === Math.ceil(activities.length / activityPerPage)}
+                  className='bg-slate-800 text-white rounded disabled:bg-gray-700 disabled:text-gray-400'
+               >
+                  Next --&gt;
+               </Button>
             </div>
          </div>
       </Layout>
