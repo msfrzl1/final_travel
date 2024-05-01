@@ -7,18 +7,21 @@ import useAuth from '../../../hooks/isAuth';
 import ModalRole from '../../../components/Elements/Modal/ModalRole';
 import { openModal } from '../../../features/modalRoleSlice';
 import Button from '../../../components/Elements/Button';
+import FormInput from '../../../components/Elements/FormInput';
 
 export default function UserPage() {
    const [users, setUsers] = useState([]);
    const [userId, setUserId] = useState(null);
+   const [searchTerm, setSearchTerm] = useState('');
    const [currentPage, setCurrentPage] = useState(1);
    const [userPerPage] = useState(8);
    const lastUser = currentPage * userPerPage;
    const firstUser = lastUser - userPerPage;
-   const currentUsers = users.slice(firstUser, lastUser);
    const { usersAuth } = useAuth();
    const dispatch = useDispatch();
    const isOpen = useSelector((state) => state.modalRole.isOpen);
+   const filteredUsers = users.filter((user) => user.name.toLowerCase().includes(searchTerm.toLowerCase()));
+   const currentUsers = filteredUsers.slice(firstUser, lastUser);
 
    const handleUpdateRole = (id) => {
       setUserId(id);
@@ -47,6 +50,15 @@ export default function UserPage() {
             <div className='text-xl font-black font-mono'>Pengaturan User</div>
          </div>
          <div className='border-b-2 mb-3'></div>
+         <div className='flex items-center justify-end gap-2 px-2'>
+            <div className='text-xs font-semibold'>Search :</div>
+            <FormInput
+               value={searchTerm}
+               onChange={(e) => setSearchTerm(e.target.value)}
+               htmlFor='search'
+               placeholder='Cari nama pengguna...'
+            />
+         </div>
          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
             {currentUsers.map((user) => (
                <div
