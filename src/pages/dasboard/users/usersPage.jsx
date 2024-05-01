@@ -6,11 +6,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import useAuth from '../../../hooks/isAuth';
 import ModalRole from '../../../components/Elements/Modal/ModalRole';
 import { openModal } from '../../../features/modalRoleSlice';
+import Button from '../../../components/Elements/Button';
 
 export default function UserPage() {
    const [users, setUsers] = useState([]);
    const [userId, setUserId] = useState(null);
-   console.log(userId);
+   const [currentPage, setCurrentPage] = useState(1);
+   const [userPerPage] = useState(8);
+   const lastUser = currentPage * userPerPage;
+   const firstUser = lastUser - userPerPage;
+   const currentUsers = users.slice(firstUser, lastUser);
    const { usersAuth } = useAuth();
    const dispatch = useDispatch();
    const isOpen = useSelector((state) => state.modalRole.isOpen);
@@ -18,6 +23,14 @@ export default function UserPage() {
    const handleUpdateRole = (id) => {
       setUserId(id);
       dispatch(openModal());
+   };
+
+   const handleNextPage = async () => {
+      setCurrentPage(currentPage + 1);
+   };
+
+   const handlePrevPage = () => {
+      setCurrentPage(currentPage - 1);
    };
 
    useEffect(() => {
@@ -35,7 +48,7 @@ export default function UserPage() {
          </div>
          <div className='border-b-2 mb-3'></div>
          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-            {users.map((user) => (
+            {currentUsers.map((user) => (
                <div
                   key={user.id}
                   className='border mb-2 m-2 rounded-lg overflow-hidden shadow-[0_0_5px_0] transition-transform duration-300 transform hover:scale-[1.01]'
@@ -75,6 +88,22 @@ export default function UserPage() {
                </div>
             ))}
             {isOpen ? <ModalRole id={userId} /> : ''}
+         </div>
+         <div className='mt-3 flex justify-center'>
+            <Button
+               onClick={handlePrevPage}
+               disabled={currentPage === 1}
+               className='mr-2 py-2 bg-slate-800 text-white rounded disabled:bg-gray-700 disabled:text-gray-400'
+            >
+               &lt;-- Prev
+            </Button>
+            <Button
+               onClick={handleNextPage}
+               disabled={currentPage === Math.ceil(users.length / userPerPage)}
+               className='bg-slate-800 text-white rounded disabled:bg-gray-700 disabled:text-gray-400'
+            >
+               Next --&gt;
+            </Button>
          </div>
       </div>
    );
