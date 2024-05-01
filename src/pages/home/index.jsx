@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { IoIosBarcode } from 'react-icons/io';
-import { GiCommercialAirplane, GiMoneyStack } from 'react-icons/gi';
+import { GiCommercialAirplane, GiLoveMystery, GiMoneyStack } from 'react-icons/gi';
 import { useEffect, useState } from 'react';
 import { sliderSettings1 } from '../../components/Elements/SliderSetting';
 import { IoLocation } from 'react-icons/io5';
@@ -15,12 +15,14 @@ export default function HomePage() {
    const [promos, setPromos] = useState([]);
    const [activitys, setActivitys] = useState([]);
    const [categories, setCategories] = useState([]);
+   const [banners, setBanners] = useState([]);
    const { getData } = useGetData();
 
    useEffect(() => {
       getData('promos', setPromos);
       getData('activities', setActivitys);
       getData('categories', setCategories);
+      getData('banners', setBanners);
    }, []);
 
    return (
@@ -180,6 +182,40 @@ export default function HomePage() {
                            />
                            <div className='absolute bottom-0 left-0 right-0 bg-white px-2 py-1'>
                               <h1 className='text-xs font-semibold'>{category.name}</h1>
+                           </div>
+                        </div>
+                     </div>
+                  ))}
+               </Slider>
+            </div>
+         </div>
+
+         <div className='bg-slate-900 pt-20 flex flex-col justify-center pb-5'>
+            <div className='flex items-center gap-2 px-5'>
+               <h1 className='text-white text-xl font-bold'>temukan apa yang Anda sukai</h1>
+               <GiLoveMystery
+                  className='text-indigo-500'
+                  size={30}
+               />
+            </div>
+            <p className='text-white text-xs mt-2 px-5'>&quot;Mari temukan apa yang Anda sukai dari banner yang kami tawarkan&quot;</p>
+            <div className='mt-10 mx-5 md:mx-32'>
+               <Slider {...sliderSettings1}>
+                  {banners.map((banner) => (
+                     <div
+                        key={banner.id}
+                        className='px-2'
+                        data-aos='zoom-in'
+                        data-aos-duration='1000'
+                     >
+                        <div className='rounded-lg overflow-hidden relative'>
+                           <img
+                              src={banner.imageUrl}
+                              alt={banner.name}
+                              className='w-full h-44 object-cover'
+                           />
+                           <div className='absolute bottom-0 left-0 right-0 bg-black px-2 py-1'>
+                              <h1 className='text-xs font-semibold text-white'>{banner.name}</h1>
                            </div>
                         </div>
                      </div>
