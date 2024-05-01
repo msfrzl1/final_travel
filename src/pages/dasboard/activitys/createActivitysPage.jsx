@@ -4,10 +4,25 @@ import { useEffect, useState } from 'react';
 import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
 import useGetData from '../../../hooks/isGetData';
+import useUpload from '../../../hooks/isUpload';
 
 export default function CreateActivitysPage() {
    const [categories, setCategories] = useState([]);
+   const [imageUrl, setImageUrl] = useState([]);
    const { getData } = useGetData();
+   const { uploadImage } = useUpload();
+
+   const handleUpload = async (e) => {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+         const res = await uploadImage('upload-image', formData);
+         setImageUrl([...imageUrl, res.data.url]);
+      } catch (error) {
+         console.log(error);
+      }
+   };
 
    useEffect(() => {
       getData('categories', setCategories);
@@ -27,7 +42,7 @@ export default function CreateActivitysPage() {
             <div className='w-full'>
                <div className='flex justify-center items-center'>
                   <img
-                     src={''}
+                     src={imageUrl}
                      alt='activity'
                      className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
                   />
@@ -67,6 +82,7 @@ export default function CreateActivitysPage() {
                            name={'description'}
                         />
                         <FormInput
+                           onChange={handleUpload}
                            htmlFor={'imageUrls'}
                            title={'Upload Gambar'}
                            type={'file'}
