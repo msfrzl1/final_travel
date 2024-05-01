@@ -18,6 +18,7 @@ import ProtectedRoute from './protectedRoute';
 import UpdatePromosPage from '../../pages/dasboard/promos/updatePromosPage';
 import CreatePromosPage from '../../pages/dasboard/promos/createPromosPage';
 import UpdateCategorysPage from '../../pages/dasboard/category/updateCategorysPage';
+import CreateCategorysPage from '../../pages/dasboard/category/createCategorysPage';
 
 export const routeList = [
    {
@@ -95,6 +96,10 @@ export const routeList = [
          {
             path: 'category/update-category/:id',
             element: <UpdateCategorysPage />,
+         },
+         {
+            path: 'category/create-category',
+            element: <CreateCategorysPage />,
          },
          {
             path: 'activity',

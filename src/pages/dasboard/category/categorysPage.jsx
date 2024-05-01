@@ -34,7 +34,7 @@ export default function CategoryPage() {
                <h1 className='text-xl font-black font-mono'>Pengaturan Category</h1>
             </div>
             <Link
-               to=''
+               to='/dasboard/category/create-category'
                className='flex gap-2 items-center'
             >
                <MdOutlineLibraryAdd
