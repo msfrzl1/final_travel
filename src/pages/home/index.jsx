@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { IoIosBarcode } from 'react-icons/io';
-import { GiMoneyStack } from 'react-icons/gi';
+import { GiCommercialAirplane, GiMoneyStack } from 'react-icons/gi';
 import { useEffect, useState } from 'react';
 import { sliderSettings1 } from '../../components/Elements/SliderSetting';
 import { IoLocation } from 'react-icons/io5';
@@ -14,11 +14,13 @@ import useGetData from '../../hooks/isGetData';
 export default function HomePage() {
    const [promos, setPromos] = useState([]);
    const [activitys, setActivitys] = useState([]);
+   const [categories, setCategories] = useState([]);
    const { getData } = useGetData();
 
    useEffect(() => {
       getData('promos', setPromos);
       getData('activities', setActivitys);
+      getData('categories', setCategories);
    }, []);
 
    return (
@@ -144,6 +146,40 @@ export default function HomePage() {
                                     })}
                                  </div>
                               </div>
+                           </div>
+                        </div>
+                     </div>
+                  ))}
+               </Slider>
+            </div>
+         </div>
+
+         <div className='bg-black pt-20 flex flex-col justify-center pb-5'>
+            <div className='flex items-center gap-2 px-5'>
+               <h1 className='text-white text-xl font-bold'>Destinasi Terpopuler</h1>
+               <GiCommercialAirplane
+                  className='text-blue-500'
+                  size={30}
+               />
+            </div>
+            <p className='text-white text-xs mt-2 px-5'>&quot;Destinasi wisata yang mungkin belum pernah anda alami sebelumnya&quot;</p>
+            <div className='mt-10 mx-5 md:mx-32'>
+               <Slider {...sliderSettings1}>
+                  {categories.map((category) => (
+                     <div
+                        key={category.id}
+                        className='px-2'
+                        data-aos='zoom-in'
+                        data-aos-duration='1000'
+                     >
+                        <div className='rounded-lg overflow-hidden relative'>
+                           <img
+                              src={category.imageUrl}
+                              alt={category.name}
+                              className='w-full h-44 object-cover'
+                           />
+                           <div className='absolute bottom-0 left-0 right-0 bg-white px-2 py-1'>
+                              <h1 className='text-xs font-semibold'>{category.name}</h1>
                            </div>
                         </div>
                      </div>
