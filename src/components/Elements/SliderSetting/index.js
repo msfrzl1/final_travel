@@ -2,7 +2,7 @@ export const sliderSettings1 = {
    className: 'center',
    infinite: true,
    centerPadding: '60px',
-   slidesToShow: 4,
+   slidesToShow: 3,
    swipeToSlide: true,
    responsive: [
       {
