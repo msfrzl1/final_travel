@@ -117,6 +117,8 @@ export default function ActivityUser() {
                   <div
                      key={activity.id}
                      className='px-2 relative'
+                     data-aos='zoom-in'
+                     data-aos-duration='1000'
                   >
                      <div className='rounded-md overflow-hidden border shadow-[0_0_3px_0] flex flex-col my-2'>
                         <Link to={`/activity-users/${activity.id}`}>
