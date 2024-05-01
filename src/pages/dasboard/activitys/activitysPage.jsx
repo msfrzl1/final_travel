@@ -6,6 +6,7 @@ import { RiSettings4Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import useGetData from '../../../hooks/isGetData';
 import Button from '../../../components/Elements/Button';
+import useDelete from '../../../hooks/isDelete';
 
 export default function ActivityPage() {
    const [activitys, setActivitys] = useState([]);
@@ -15,6 +16,7 @@ export default function ActivityPage() {
    const firstActivity = lastActivity - activityPerPage;
    const currentActivity = activitys.slice(firstActivity, lastActivity);
    const { getData } = useGetData();
+   const { deleteData } = useDelete();
 
    const handleNextPage = () => {
       setCurrentPage(currentPage + 1);
@@ -22,6 +24,13 @@ export default function ActivityPage() {
 
    const handlePrevPage = () => {
       setCurrentPage(currentPage - 1);
+   };
+
+   const handleDelete = async (id) => {
+      const response = await deleteData(`delete-activity/${id}`);
+      if (response.status === 200) {
+         window.location.reload();
+      }
    };
 
    useEffect(() => {
@@ -72,6 +81,7 @@ export default function ActivityPage() {
                      />
                   </Link>
                   <MdDeleteForever
+                     onClick={() => handleDelete(activity.id)}
                      className='absolute bg-white/95 top-11 right-2 text-red-700 hover:text-red-800 border rounded-xl cursor-pointer'
                      size={30}
                   />
