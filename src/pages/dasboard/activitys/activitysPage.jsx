@@ -5,10 +5,24 @@ import { MdDeleteForever, MdOutlineLibraryAdd } from 'react-icons/md';
 import { RiSettings4Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import useGetData from '../../../hooks/isGetData';
+import Button from '../../../components/Elements/Button';
 
 export default function ActivityPage() {
    const [activitys, setActivitys] = useState([]);
+   const [currentPage, setCurrentPage] = useState(1);
+   const [activityPerPage] = useState(8);
+   const lastActivity = currentPage * activityPerPage;
+   const firstActivity = lastActivity - activityPerPage;
+   const currentActivity = activitys.slice(firstActivity, lastActivity);
    const { getData } = useGetData();
+
+   const handleNextPage = () => {
+      setCurrentPage(currentPage + 1);
+   };
+
+   const handlePrevPage = () => {
+      setCurrentPage(currentPage - 1);
+   };
 
    useEffect(() => {
       getData('activities', setActivitys);
@@ -36,7 +50,7 @@ export default function ActivityPage() {
             </Link>
          </div>
          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-            {activitys.map((activity) => (
+            {currentActivity.map((activity) => (
                <div
                   key={activity.id}
                   className='relative border m-2 rounded-lg overflow-hidden shadow-[0_0_5px_0] transition-transform duration-300 transform hover:scale-[1.01]'
@@ -61,6 +75,22 @@ export default function ActivityPage() {
                   />
                </div>
             ))}
+         </div>
+         <div className='mt-3 flex justify-center'>
+            <Button
+               onClick={handlePrevPage}
+               disabled={currentPage === 1}
+               className='mr-2 py-2 bg-slate-800 text-white rounded disabled:bg-gray-700 disabled:text-gray-400'
+            >
+               &lt;-- Prev
+            </Button>
+            <Button
+               onClick={handleNextPage}
+               disabled={currentPage === Math.ceil(activitys.length / activityPerPage)}
+               className='bg-slate-800 text-white rounded disabled:bg-gray-700 disabled:text-gray-400'
+            >
+               Next --&gt;
+            </Button>
          </div>
       </div>
    );
