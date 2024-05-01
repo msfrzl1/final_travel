@@ -6,10 +6,24 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useGetData from '../../hooks/isGetData';
 import Layout from '../../components/Layouts/Layout';
+import Button from '../../components/Elements/Button';
 
 export default function PromoUser() {
    const [promos, setPromos] = useState([]);
+   const [currentPage, setCurrentPage] = useState(1);
+   const [promoPerPage] = useState(8);
+   const lastPromo = currentPage * promoPerPage;
+   const firstPromo = lastPromo - promoPerPage;
+   const currentPromos = promos.slice(firstPromo, lastPromo);
    const { getData } = useGetData();
+
+   const handleNextPage = () => {
+      setCurrentPage(currentPage + 1);
+   };
+
+   const handlePrevPage = () => {
+      setCurrentPage(currentPage - 1);
+   };
 
    useEffect(() => {
       getData('promos', setPromos);
@@ -32,7 +46,7 @@ export default function PromoUser() {
                <div className='px-2'>Menampikan {promos.length} hasil promo</div>
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-[0.7rem]'>
-               {promos.map((promo) => (
+               {currentPromos.map((promo) => (
                   <div
                      key={promo.id}
                      className='relative shadow-[0_0_3px_0] rounded-md m-2 overflow-hidden'
@@ -80,6 +94,22 @@ export default function PromoUser() {
                      </Link>
                   </div>
                ))}
+            </div>
+            <div className='mt-3 flex justify-center'>
+               <Button
+                  onClick={handlePrevPage}
+                  disabled={currentPage === 1}
+                  className='mr-2 py-2 bg-slate-800 text-white rounded disabled:bg-gray-700 disabled:text-gray-400'
+               >
+                  &lt;-- Prev
+               </Button>
+               <Button
+                  onClick={handleNextPage}
+                  disabled={currentPage === Math.ceil(promos.length / promoPerPage)}
+                  className='bg-slate-800 text-white rounded disabled:bg-gray-700 disabled:text-gray-400'
+               >
+                  Next --&gt;
+               </Button>
             </div>
          </div>
       </Layout>
