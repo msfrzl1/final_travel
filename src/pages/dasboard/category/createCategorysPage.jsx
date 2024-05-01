@@ -1,10 +1,27 @@
 import { RiSettings4Line } from 'react-icons/ri';
 import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
+import { useState } from 'react';
+import useUpload from '../../../hooks/isUpload';
 
 export default function CreateCategorysPage() {
+   const [imageUrl, setImageUrl] = useState(null);
+   const { uploadImage } = useUpload();
+
+   const handleUpload = async (e) => {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+         const response = await uploadImage('upload-image', formData);
+         setImageUrl(response.data.url);
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
    return (
-      <div className={`flex max-w-xl mx-auto`}>
+      <div className={`flex max-w-xl mx-auto ${imageUrl ? 'pt-3' : 'py-16'}`}>
          <div className='w-full border px-3 pb-3 pt-3 rounded-md shadow-[0_0_15px_0] overflow-hidden'>
             <div className='flex items-center gap-2 mb-1'>
                <RiSettings4Line
@@ -15,11 +32,13 @@ export default function CreateCategorysPage() {
             </div>
             <div className='border-b-2 mb-3'></div>
 
-            <img
-               src={''}
-               alt='category'
-               className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
-            />
+            {imageUrl && (
+               <img
+                  src={imageUrl}
+                  alt='category'
+                  className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
+               />
+            )}
 
             <div className='w-full'>
                <form className='shadow-[0_0_5px_0] p-3'>
@@ -30,6 +49,7 @@ export default function CreateCategorysPage() {
                      placeholder={'Masukan Nama Banner'}
                   />
                   <FormInput
+                     onChange={handleUpload}
                      htmlFor={'imageUrl'}
                      title={'Upload Gambar'}
                      type={'file'}
