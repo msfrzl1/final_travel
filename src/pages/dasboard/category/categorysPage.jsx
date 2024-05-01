@@ -22,7 +22,7 @@ export default function CategoryPage() {
                   size={25}
                   className='text-red-500'
                />
-               <h1 className='text-xl font-black font-mono'>Pengaturan Banner</h1>
+               <h1 className='text-xl font-black font-mono'>Pengaturan Category</h1>
             </div>
             <Link
                to=''
@@ -32,7 +32,7 @@ export default function CategoryPage() {
                   className=' text-red-400 hover:text-red-500 cursor-pointer'
                   size={20}
                />
-               <h1 className='font-semibold text-xs'>Membuat Banner Baru</h1>
+               <h1 className='font-semibold text-xs'>Membuat Category Baru</h1>
             </Link>
          </div>
          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
