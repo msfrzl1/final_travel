@@ -65,7 +65,7 @@ export default function ActivityPage() {
                   <div className='absolute bottom-0 left-0 right-0 bg-black text-white px-2 py-1'>
                      <h1 className='text-xs font-semibold'>{activity.title}</h1>
                   </div>
-                  <Link to=''>
+                  <Link to={`/dasboard/activity/update-activity/${activity.id}`}>
                      <BiEdit
                         className='absolute bg-white/95 top-2 right-2 text-indigo-700 hover:text-indigo-800 border rounded-xl'
                         size={30}

@@ -19,6 +19,7 @@ import UpdatePromosPage from '../../pages/dasboard/promos/updatePromosPage';
 import CreatePromosPage from '../../pages/dasboard/promos/createPromosPage';
 import UpdateCategorysPage from '../../pages/dasboard/category/updateCategorysPage';
 import CreateCategorysPage from '../../pages/dasboard/category/createCategorysPage';
+import UpdateActivitysPage from '../../pages/dasboard/activitys/updateActivitysPage';
 
 export const routeList = [
    {
@@ -104,6 +105,10 @@ export const routeList = [
          {
             path: 'activity',
             element: <ActivityPage />,
+         },
+         {
+            path: 'activity/update-activity/:id',
+            element: <UpdateActivitysPage />,
          },
       ],
    },
