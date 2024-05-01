@@ -54,6 +54,8 @@ export default function ActivityPage() {
                <div
                   key={activity.id}
                   className='relative border m-2 rounded-lg overflow-hidden shadow-[0_0_5px_0] transition-transform duration-300 transform hover:scale-[1.01]'
+                  data-aos='zoom-in'
+                  data-aos-duration='1000'
                >
                   <img
                      src={activity.imageUrls[0]}
