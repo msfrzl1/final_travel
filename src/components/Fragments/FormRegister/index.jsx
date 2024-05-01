@@ -1,19 +1,25 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { FaEye, FaRegistered } from 'react-icons/fa6';
+import { IoEyeOffSharp } from 'react-icons/io5';
 import 'react-toastify/dist/ReactToastify.css';
 import FormInput from '../../Elements/FormInput';
 import Button from '../../Elements/Button';
 import SelectOption from '../../Elements/SelectOption';
 import useUpload from '../../../hooks/isUpload';
 import useAuth from '../../../hooks/isAuth';
-import { FaRegistered } from 'react-icons/fa6';
 
 export default function FormRegister() {
    const [imageUrl, setImageUrl] = useState(null);
+   const [showPassword, setShowPassword] = useState(false);
    const { uploadImage } = useUpload();
    const { auth } = useAuth();
    const navigate = useNavigate();
+
+   const handleShowPassword = () => {
+      setShowPassword(!showPassword);
+   };
 
    const handleUpload = async (e) => {
       const file = e.target.files[0];
@@ -70,7 +76,7 @@ export default function FormRegister() {
             <div className='text-sm font-semibold'>Isi data diri anda untuk melanjutkan</div>
          </div>
          <form onSubmit={handleSubmit}>
-            <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-3'>
+            <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-3'>
                <div className='w-full'>
                   <FormInput
                      htmlFor={'email'}
@@ -85,20 +91,38 @@ export default function FormRegister() {
                      name={'name'}
                      placeholder={'Nama lengkap / Nama Anda'}
                   />
-                  <FormInput
-                     htmlFor={'password'}
-                     title={'Password'}
-                     type={'password'}
-                     name={'password'}
-                     placeholder={'*******'}
-                  />
-                  <FormInput
-                     htmlFor={'passwordRepeat'}
-                     title={'Ulangi Password'}
-                     type={'password'}
-                     name={'passwordRepeat'}
-                     placeholder={'********'}
-                  />
+                  <div className='relative'>
+                     <FormInput
+                        htmlFor={'password'}
+                        title={'Password'}
+                        type={showPassword ? 'text' : 'password'}
+                        name={'password'}
+                        placeholder={'*******'}
+                     />
+                     <button
+                        type='button'
+                        onClick={handleShowPassword}
+                        className='absolute top-[31px] right-2 outline-none'
+                     >
+                        {showPassword ? <FaEye size={20} /> : <IoEyeOffSharp size={20} />}
+                     </button>
+                  </div>
+                  <div className='relative'>
+                     <FormInput
+                        htmlFor={'passwordRepeat'}
+                        title={'Ulangi Password'}
+                        type={showPassword ? 'text' : 'password'}
+                        name={'passwordRepeat'}
+                        placeholder={'********'}
+                     />
+                     <button
+                        type='button'
+                        onClick={handleShowPassword}
+                        className='absolute top-[31px] right-2 outline-none'
+                     >
+                        {showPassword ? <FaEye size={20} /> : <IoEyeOffSharp size={20} />}
+                     </button>
+                  </div>
                </div>
                <div className='w-full'>
                   <SelectOption

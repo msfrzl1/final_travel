@@ -1,12 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { FaEye, FaUsersGear } from 'react-icons/fa6';
+import { useState } from 'react';
+import { IoEyeOffSharp } from 'react-icons/io5';
 import 'react-toastify/dist/ReactToastify.css';
 import Button from '../../Elements/Button';
 import FormInput from '../../Elements/FormInput';
 import useAuth from '../../../hooks/isAuth';
-import { FaEye, FaUsersGear } from 'react-icons/fa6';
-import { useState } from 'react';
-import { IoEyeOffSharp } from 'react-icons/io5';
 
 export default function FormLogin() {
    const { auth } = useAuth();
