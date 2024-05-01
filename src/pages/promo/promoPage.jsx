@@ -50,6 +50,8 @@ export default function PromoUser() {
                   <div
                      key={promo.id}
                      className='relative shadow-[0_0_3px_0] rounded-md m-2 overflow-hidden'
+                     data-aos='zoom-in'
+                     data-aos-duration='1000'
                   >
                      <Link to={`/promo-users/${promo.id}`}>
                         <div className='rounded-t-md overflow-hidden border'>
