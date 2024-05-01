@@ -1,12 +1,18 @@
 import { RiSettings4Line } from 'react-icons/ri';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
-import { useState } from 'react';
 import useUpload from '../../../hooks/isUpload';
+import useCreate from '../../../hooks/isCreate';
 
 export default function CreateCategorysPage() {
    const [imageUrl, setImageUrl] = useState(null);
    const { uploadImage } = useUpload();
+   const { create } = useCreate();
+   const navigate = useNavigate();
 
    const handleUpload = async (e) => {
       const file = e.target.files[0];
@@ -17,6 +23,30 @@ export default function CreateCategorysPage() {
          setImageUrl(response.data.url);
       } catch (error) {
          console.log(error);
+      }
+   };
+
+   const handleCreateCategory = async (e) => {
+      e.preventDefault();
+      const dataCategory = {
+         name: e.target.name.value,
+         imageUrl: imageUrl,
+      };
+
+      if (dataCategory.name.length <= 0) {
+         toast.error('Masukan nama category');
+         return;
+      } else if (dataCategory.imageUrl === null) {
+         toast.error('Masukan gambar category');
+         return;
+      }
+
+      const response = await create('create-category', dataCategory);
+      if (response.status === 200) {
+         toast.success(response.data.message);
+         setTimeout(() => {
+            navigate('/dasboard/category');
+         }, 2000);
       }
    };
 
@@ -41,7 +71,10 @@ export default function CreateCategorysPage() {
             )}
 
             <div className='w-full'>
-               <form className='shadow-[0_0_5px_0] p-3'>
+               <form
+                  onSubmit={handleCreateCategory}
+                  className='shadow-[0_0_5px_0] p-3'
+               >
                   <FormInput
                      htmlFor={'name'}
                      title={'Nama'}
@@ -64,6 +97,18 @@ export default function CreateCategorysPage() {
                </form>
             </div>
          </div>
+         <ToastContainer
+            position='top-center'
+            autoClose={1500}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            pauseOnHover
+            theme='light'
+            transition:Flip
+         />
       </div>
    );
 }
