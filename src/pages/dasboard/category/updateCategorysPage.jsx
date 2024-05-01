@@ -1,18 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { RiSettings4Line } from 'react-icons/ri';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
-import { useEffect, useState } from 'react';
 import useGetData from '../../../hooks/isGetData';
-import { useParams } from 'react-router-dom';
 import useUpload from '../../../hooks/isUpload';
+import useUpdate from '../../../hooks/isUpdate';
 
 export default function UpdateCategorysPage() {
    const [category, setCategory] = useState([]);
    const [imageUrl, setImageUrl] = useState(null);
    const { getData } = useGetData();
    const { uploadImage } = useUpload();
+   const { update } = useUpdate();
    const { id } = useParams();
+   const navigate = useNavigate();
 
    const handleUpload = async (e) => {
       const file = e.target.files[0];
@@ -23,6 +28,27 @@ export default function UpdateCategorysPage() {
          setImageUrl(response.data.url);
       } catch (error) {
          console.log(error);
+      }
+   };
+
+   const handleUpdateCategory = async (e) => {
+      e.preventDefault();
+      const dataCategory = {
+         name: e.target.name.value,
+         imageUrl: imageUrl || category.imageUrl,
+      };
+      try {
+         const response = await update(`update-category/${id}`, dataCategory);
+         if (response.status === 200) {
+            toast.success(response.data.message);
+            setTimeout(() => {
+               navigate('/dasboard/category');
+            }, 2000);
+         }
+      } catch (error) {
+         if (dataCategory.name.length <= 0) {
+            toast.error('Masukan nama category');
+         }
       }
    };
 
@@ -47,7 +73,10 @@ export default function UpdateCategorysPage() {
                className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
             />
             <div className='w-full'>
-               <form className='shadow-[0_0_5px_0] p-3'>
+               <form
+                  onSubmit={handleUpdateCategory}
+                  className='shadow-[0_0_5px_0] p-3'
+               >
                   <FormInput
                      defaultValue={category.name}
                      htmlFor={'name'}
@@ -70,6 +99,18 @@ export default function UpdateCategorysPage() {
                </form>
             </div>
          </div>
+         <ToastContainer
+            position='top-center'
+            autoClose={1500}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            pauseOnHover
+            theme='light'
+            transition:Flip
+         />
       </div>
    );
 }
