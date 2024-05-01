@@ -76,7 +76,7 @@ export default function UpdateActivitysPage() {
                         <div className='flex flex-col my-2'>
                            <label
                               htmlFor='categoryId'
-                              className='text-xs font-bold mb-1'
+                              className='text-sm font-bold mb-1'
                            >
                               Category ID
                            </label>
