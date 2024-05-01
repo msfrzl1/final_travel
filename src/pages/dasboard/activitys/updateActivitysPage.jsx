@@ -1,18 +1,32 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { MdDeleteForever } from 'react-icons/md';
 import { RiSettings4Line } from 'react-icons/ri';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import FormInput from '../../../components/Elements/FormInput';
 import Button from '../../../components/Elements/Button';
-import { useEffect, useState } from 'react';
 import useGetData from '../../../hooks/isGetData';
-import { useParams } from 'react-router-dom';
+import useUpload from '../../../hooks/isUpload';
 
 export default function UpdateActivitysPage() {
    const [activity, setActivity] = useState([]);
    const [imageUrl, setImageUrl] = useState([]);
    const [categorys, setCategorys] = useState([]);
    const { getData } = useGetData();
+   const { uploadImage } = useUpload();
    const { id } = useParams();
+
+   const handleUpload = async (e) => {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+         const response = await uploadImage('upload-image', formData);
+         setImageUrl([...imageUrl, response.data.url]);
+      } catch (error) {
+         console.log(error);
+      }
+   };
 
    useEffect(() => {
       getData(`activity/${id}`, setActivity);
@@ -95,6 +109,7 @@ export default function UpdateActivitysPage() {
                            name={'description'}
                         />
                         <FormInput
+                           onChange={handleUpload}
                            htmlFor={'imageUrls'}
                            title={'Upload Gambar'}
                            type={'file'}
