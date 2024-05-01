@@ -5,10 +5,19 @@ import { MdDeleteForever, MdOutlineLibraryAdd } from 'react-icons/md';
 import { RiSettings4Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import useGetData from '../../../hooks/isGetData';
+import useDelete from './../../../hooks/isDelete';
 
 export default function CategoryPage() {
    const [categorys, setCategorys] = useState([]);
    const { getData } = useGetData();
+   const { deleteData } = useDelete();
+
+   const handleDelete = async (id) => {
+      const response = await deleteData(`delete-category/${id}`);
+      if (response.status === 200) {
+         window.location.reload();
+      }
+   };
 
    useEffect(() => {
       getData('categories', setCategorys);
@@ -56,6 +65,7 @@ export default function CategoryPage() {
                      />
                   </Link>
                   <MdDeleteForever
+                     onClick={() => handleDelete(category.id)}
                      className='absolute bg-white/95 top-11 right-2 text-red-700 hover:text-red-800 border rounded-xl cursor-pointer'
                      size={30}
                   />
