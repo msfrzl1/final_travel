@@ -4,11 +4,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import Button from '../../Elements/Button';
 import FormInput from '../../Elements/FormInput';
 import useAuth from '../../../hooks/isAuth';
-import { FaUsersGear } from 'react-icons/fa6';
+import { FaEye, FaUsersGear } from 'react-icons/fa6';
+import { useState } from 'react';
+import { IoEyeOffSharp } from 'react-icons/io5';
 
 export default function FormLogin() {
    const { auth } = useAuth();
+   const [showPassword, setShowPassword] = useState(false);
    const navigate = useNavigate();
+
+   const handleShowPassword = () => {
+      setShowPassword(!showPassword);
+   };
 
    const handleSumbit = async (e) => {
       e.preventDefault();
@@ -47,13 +54,22 @@ export default function FormLogin() {
                   name={'email'}
                   placeholder={'example123@mail.com'}
                />
-               <FormInput
-                  htmlFor={'password'}
-                  title={'Password'}
-                  type={'password'}
-                  name={'password'}
-                  placeholder={'********'}
-               />
+               <div className='relative'>
+                  <FormInput
+                     htmlFor={'password'}
+                     title={'Password'}
+                     type={showPassword ? 'text' : 'password'}
+                     name={'password'}
+                     placeholder={'********'}
+                  />
+                  <button
+                     onClick={handleShowPassword}
+                     type='button'
+                     className='absolute top-[30px] right-2 outline-none'
+                  >
+                     {showPassword ? <FaEye size={20} /> : <IoEyeOffSharp size={20} />}
+                  </button>
+               </div>
                <div className='flex justify-center font-semibold gap-1 pb-3 text-sm'>
                   <div>Belum punya akun ?</div>
                   <Link
