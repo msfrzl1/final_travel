@@ -6,9 +6,15 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useGetData from '../../../hooks/isGetData';
 import useDelete from '../../../hooks/isDelete';
+import Button from '../../../components/Elements/Button';
 
 export default function BannerPage() {
    const [banners, setBanners] = useState([]);
+   const [currentPage, setCurrentPage] = useState(1);
+   const [bannerPerpage] = useState(8);
+   const lastBanner = currentPage * bannerPerpage;
+   const firstBanner = lastBanner - bannerPerpage;
+   const currentBanner = banners.slice(firstBanner, lastBanner);
    const { getData } = useGetData();
    const { deleteData } = useDelete();
 
@@ -19,12 +25,20 @@ export default function BannerPage() {
       }
    };
 
+   const handleNextPage = async () => {
+      setCurrentPage(currentPage + 1);
+   };
+
+   const handlePrevPage = () => {
+      setCurrentPage(currentPage - 1);
+   };
+
    useEffect(() => {
       getData('banners', setBanners);
    }, []);
 
    return (
-      <div className={banners.length <= 4 ? 'pb-48' : ''}>
+      <div className={currentBanner.length <= 4 ? 'pb-44' : ''}>
          <div className='flex-col text-center md:flex md:flex-row items-center justify-between pb-2 mb-3 border-b-2'>
             <div className='flex items-center gap-2 mb-1'>
                <RiSettings4Line
@@ -45,7 +59,7 @@ export default function BannerPage() {
             </Link>
          </div>
          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-            {banners.map((banner) => (
+            {currentBanner.map((banner) => (
                <div
                   key={banner.id}
                   className='relative border m-2 rounded-lg overflow-hidden shadow-[0_0_5px_0] transition-transform duration-300 transform hover:scale-[1.01]'
@@ -71,6 +85,22 @@ export default function BannerPage() {
                   />
                </div>
             ))}
+         </div>
+         <div className='mt-3 flex justify-center'>
+            <Button
+               onClick={handlePrevPage}
+               disabled={currentPage === 1}
+               className='mr-2 py-2 bg-slate-800 text-white rounded disabled:bg-gray-700 disabled:text-gray-400'
+            >
+               &lt;-- Prev
+            </Button>
+            <Button
+               onClick={handleNextPage}
+               disabled={currentPage === Math.ceil(banners.length / bannerPerpage)}
+               className='bg-slate-800 text-white rounded disabled:bg-gray-700 disabled:text-gray-400'
+            >
+               Next --&gt;
+            </Button>
          </div>
       </div>
    );
