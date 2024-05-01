@@ -52,6 +52,8 @@ export default function UserPage() {
                <div
                   key={user.id}
                   className='border mb-2 m-2 rounded-lg overflow-hidden shadow-[0_0_5px_0] transition-transform duration-300 transform hover:scale-[1.01]'
+                  data-aos='zoom-in'
+                  data-aos-duration='1000'
                >
                   <div className='flex justify-center py-2 mb-2 bg-slate-900 rounded-sm'>
                      <img
