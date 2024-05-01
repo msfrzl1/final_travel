@@ -24,7 +24,7 @@ export default function PromoPage() {
    }, []);
 
    return (
-      <div>
+      <div className={promos.length <= 4 ? 'pb-48' : ''}>
          <div className='flex-col text-center md:flex md:flex-row items-center justify-between pb-2 mb-3 border-b-2'>
             <div className='flex items-center gap-2 mb-1'>
                <RiSettings4Line
