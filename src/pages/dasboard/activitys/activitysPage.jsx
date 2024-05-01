@@ -39,7 +39,7 @@ export default function ActivityPage() {
                <h1 className='text-xl font-black font-mono'>Pengaturan Banner</h1>
             </div>
             <Link
-               to=''
+               to='/dasboard/activity/create-activity'
                className='flex gap-2 items-center'
             >
                <MdOutlineLibraryAdd
