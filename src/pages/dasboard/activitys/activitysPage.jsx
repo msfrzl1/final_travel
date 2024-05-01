@@ -35,6 +35,7 @@ export default function ActivityPage() {
 
    useEffect(() => {
       getData('activities', setActivitys);
+      window.scrollTo(0, 0);
    }, []);
 
    return (

@@ -54,6 +54,7 @@ export default function UpdateBannersPage() {
 
    useEffect(() => {
       getData(`banner/${id}`, setBanner);
+      window.scrollTo(0, 0);
    }, []);
 
    return (

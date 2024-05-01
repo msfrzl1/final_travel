@@ -95,6 +95,7 @@ export default function UpdateActivitysPage() {
    useEffect(() => {
       getData(`activity/${id}`, setActivity);
       getData('categories', setCategorys);
+      window.scrollTo(0, 0);
    }, []);
 
    useEffect(() => {

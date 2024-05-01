@@ -27,6 +27,7 @@ export default function PromoUser() {
 
    useEffect(() => {
       getData('promos', setPromos);
+      window.scrollTo(0, 0);
    }, []);
 
    return (

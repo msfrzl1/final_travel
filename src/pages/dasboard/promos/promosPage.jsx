@@ -35,6 +35,7 @@ export default function PromoPage() {
 
    useEffect(() => {
       getData('promos', setPromos);
+      window.scrollTo(0, 0);
    }, []);
 
    return (

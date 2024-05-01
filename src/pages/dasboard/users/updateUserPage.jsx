@@ -52,6 +52,7 @@ export default function UpdateUser() {
 
    useEffect(() => {
       usersAuth('user', setUser);
+      window.scrollTo(0, 0);
    }, []);
 
    return (

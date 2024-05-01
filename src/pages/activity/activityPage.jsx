@@ -29,6 +29,7 @@ export default function ActivityUser() {
    useEffect(() => {
       getData('activities', setActivities);
       getData('categories', setCategorys);
+      window.scrollTo(0, 0);
    }, []);
 
    const handleActivityByCategoryId = async (e) => {

@@ -54,6 +54,7 @@ export default function UpdateCategorysPage() {
 
    useEffect(() => {
       getData(`category/${id}`, setCategory);
+      window.scrollTo(0, 0);
    }, []);
 
    return (

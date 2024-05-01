@@ -23,6 +23,7 @@ export default function HomePage() {
       getData('activities', setActivitys);
       getData('categories', setCategories);
       getData('banners', setBanners);
+      window.scrollTo(0, 0);
    }, []);
 
    return (

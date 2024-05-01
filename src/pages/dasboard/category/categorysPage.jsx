@@ -35,6 +35,7 @@ export default function CategoryPage() {
 
    useEffect(() => {
       getData('categories', setCategorys);
+      window.scrollTo(0, 0);
    }, []);
 
    return (

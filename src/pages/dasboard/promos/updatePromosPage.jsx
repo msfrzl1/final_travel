@@ -69,6 +69,7 @@ export default function UpdatePromosPage() {
 
    useEffect(() => {
       getData(`promo/${id}`, setPromo);
+      window.scrollTo(0, 0);
    }, []);
 
    return (

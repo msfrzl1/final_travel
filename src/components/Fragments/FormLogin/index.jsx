@@ -35,6 +35,7 @@ export default function FormLogin() {
       }
    };
 
+   window.scrollTo(0, 0);
    return (
       <>
          <div className='max-w-lg flex flex-col mx-auto border shadow-[0_0_5px_0] rounded-md p-3 mt-4'>

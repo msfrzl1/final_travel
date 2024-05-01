@@ -11,6 +11,7 @@ export default function PromoDetailUser() {
 
    useEffect(() => {
       getData(`promo/${id}`, setPromo);
+      window.scrollTo(0, 0);
    }, []);
 
    return (

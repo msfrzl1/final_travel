@@ -65,6 +65,7 @@ export default function FormRegister() {
       }
    };
 
+   window.scrollTo(0, 0);
    return (
       <div className='max-w-2xl flex flex-col mx-auto border shadow-[0_0_5px_0] rounded-md p-3 mb-3 md:mb-0 mt-[3.9rem] overflow-hidden'>
          <div className='text-center mb-5'>

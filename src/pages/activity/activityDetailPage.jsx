@@ -18,6 +18,7 @@ export default function ActivityDetailUser() {
       getData(`activity/${id}`, (data) => {
          setMapHtml(data.location_maps);
       });
+      window.scrollTo(0, 0);
    }, [id]);
 
    return (

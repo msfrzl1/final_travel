@@ -38,6 +38,7 @@ export default function UserPage() {
 
    useEffect(() => {
       usersAuth('all-user', setUsers);
+      window.scrollTo(0, 0);
    }, []);
 
    return (

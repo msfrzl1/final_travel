@@ -35,6 +35,7 @@ export default function BannerPage() {
 
    useEffect(() => {
       getData('banners', setBanners);
+      window.scrollTo(0, 0);
    }, []);
 
    return (
