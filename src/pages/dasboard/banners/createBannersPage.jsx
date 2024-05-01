@@ -32,6 +32,7 @@ export default function CreateBannerPage() {
          name: e.target.name.value,
          imageUrl: imageUrl,
       };
+
       if (dataBanner.name.length < 1) {
          toast.error('Masukan nama banner');
          return;

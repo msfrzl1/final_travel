@@ -84,7 +84,7 @@ export default function CreatePromosPage() {
             <div className='w-full'>
                <img
                   src={imageUrl}
-                  alt=''
+                  alt='promo'
                   className='w-full h-auto rounded-t-md shadow-[0_0_5px_0] mb-1'
                />
                <form
