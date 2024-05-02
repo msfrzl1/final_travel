@@ -45,11 +45,15 @@ export default function PromoDetailUser() {
                <h1 className='text-2xl font-semibold mb-2'>{promo.title}</h1>
                <div className='mb-2 text-sm'>
                   <span className='font-semibold'>Minimum Claim Price:</span>
-                  <span className='ml-2 text-indigo-600'>{promo.minimum_claim_price}</span>
+                  <span className='ml-2 text-indigo-600'>
+                     {promo.minimum_claim_price && promo.minimum_claim_price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
+                  </span>
                </div>
                <div className='mb-2 text-sm'>
                   <span className='font-semibold'>Discount Price:</span>
-                  <span className='ml-2 text-indigo-600'>{promo.promo_discount_price}</span>
+                  <span className='ml-2 text-indigo-600'>
+                     {promo.promo_discount_price && promo.promo_discount_price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
+                  </span>
                </div>
                <div className='mb-4 text-sm'>
                   <span className='font-semibold'>Promo Code:</span>
