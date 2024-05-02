@@ -149,7 +149,7 @@ export default function ActivityUser() {
                               <div className='text-xs'>
                                  <div className='flex items-center gap-1'>
                                     <TbCurrencyDollarOff />
-                                    <del>{activity.price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</del>
+                                    <del>{activity.price && activity.price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</del>
                                  </div>
                                  <div className='flex items-center gap-1'>
                                     <FaSackDollar />
