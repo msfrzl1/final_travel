@@ -30,10 +30,12 @@ export default function UserPage() {
 
    const handleNextPage = () => {
       setCurrentPage(currentPage + 1);
+      window.scrollTo(0, 0);
    };
 
    const handlePrevPage = () => {
       setCurrentPage(currentPage - 1);
+      window.scrollTo(0, 0);
    };
 
    useEffect(() => {

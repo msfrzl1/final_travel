@@ -27,10 +27,12 @@ export default function BannerPage() {
 
    const handleNextPage = () => {
       setCurrentPage(currentPage + 1);
+      window.scrollTo(0, 0);
    };
 
    const handlePrevPage = () => {
       setCurrentPage(currentPage - 1);
+      window.scrollTo(0, 0);
    };
 
    useEffect(() => {
