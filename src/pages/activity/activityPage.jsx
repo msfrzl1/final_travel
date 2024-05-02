@@ -154,7 +154,8 @@ export default function ActivityUser() {
                                  <div className='flex items-center gap-1'>
                                     <FaSackDollar />
                                     <div className='text-green-500'>
-                                       {activity.price_discount.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
+                                       {activity.price_discount &&
+                                          activity.price_discount.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
                                     </div>
                                  </div>
                               </div>
