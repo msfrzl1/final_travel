@@ -82,11 +82,15 @@ export default function ActivityDetailUser() {
                            size={20}
                            className='text-gray-600'
                         />
-                        <div className=' text-green-500'>{activity.price}</div>
+                        <div className=' text-green-500'>
+                           {activity.price && activity.price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
+                        </div>
                      </div>
                      <div className='text-sm'>/</div>
                      <div className='text-sm'>
-                        <del>{activity.price_discount}</del>
+                        <del>
+                           {activity.price_discount && activity.price_discount.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
+                        </del>
                      </div>
                   </div>
                   <div className='max-w-4xl border rounded p-4 bg-slate-200'>
