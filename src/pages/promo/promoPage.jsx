@@ -76,19 +76,15 @@ export default function PromoUser() {
                                  <div className='flex items-center gap-1'>
                                     <TbCurrencyDollarOff />
                                     <del>
-                                       {promo.minimum_claim_price.toLocaleString('id-ID', {
-                                          style: 'currency',
-                                          currency: 'IDR',
-                                       })}
+                                       {promo.minimum_claim_price &&
+                                          promo.minimum_claim_price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
                                     </del>
                                  </div>
                                  <div className='flex items-center gap-1'>
                                     <FaSackDollar />
                                     <div className='text-green-500'>
-                                       {promo.promo_discount_price.toLocaleString('id-ID', {
-                                          style: 'currency',
-                                          currency: 'IDR',
-                                       })}
+                                       {promo.promo_discount_price &&
+                                          promo.promo_discount_price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
                                     </div>
                                  </div>
                               </div>
