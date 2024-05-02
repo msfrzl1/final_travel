@@ -106,7 +106,7 @@ export default function ActivityDetailUser() {
                   dangerouslySetInnerHTML={{ __html: mapHtml }}
                   id='map-container'
                />
-               {mapHtml.length === 0 && (
+               {!mapHtml && (
                   <div className='w-full'>
                      <div className='w-full flex justify-center items-center h-[354px]'>
                         <h1 className='text-xl font-bold font-mono'>No Map found</h1>
