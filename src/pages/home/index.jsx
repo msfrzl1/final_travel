@@ -81,18 +81,10 @@ export default function HomePage() {
                               </div>
                               <div className='text-xs'>
                                  <div className=''>
-                                    <del>
-                                       {promo.minimum_claim_price.toLocaleString('id-ID', {
-                                          style: 'currency',
-                                          currency: 'IDR',
-                                       })}
-                                    </del>
+                                    <del>{promo.minimum_claim_price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</del>
                                  </div>
                                  <div className='text-green-500'>
-                                    {promo.promo_discount_price.toLocaleString('id-ID', {
-                                       style: 'currency',
-                                       currency: 'IDR',
-                                    })}
+                                    {promo.promo_discount_price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
                                  </div>
                               </div>
                            </div>
@@ -135,18 +127,11 @@ export default function HomePage() {
                               </div>
                               <div className='text-xs'>
                                  <div className=''>
-                                    <del>
-                                       {activity.price.toLocaleString('id-ID', {
-                                          style: 'currency',
-                                          currency: 'IDR',
-                                       })}
-                                    </del>
+                                    <del>{activity.price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</del>
                                  </div>
                                  <div className='text-green-500'>
-                                    {activity.price_discount.toLocaleString('id-ID', {
-                                       style: 'currency',
-                                       currency: 'IDR',
-                                    })}
+                                    {activity.price_discount &&
+                                       activity.price_discount.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
                                  </div>
                               </div>
                            </div>
